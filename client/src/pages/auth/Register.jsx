@@ -1,4 +1,6 @@
 import { useState } from "react";
+import fetchData from "../../utils/fetchData";
+import { saveToken } from "../../utils/localStorage"; 
 
 function Register({ }) {
     const [error, setError] = useState(null);
@@ -28,7 +30,9 @@ function Register({ }) {
         e.preventDefault();
 
         try {
+            
             const { nickname, email, password } = userData;
+
         
             if (!nickname || nickname.trim() === "") {
                 setError("El nombre de usuario es obligatorio");
@@ -51,13 +55,33 @@ function Register({ }) {
                 setError("La contraseña debe tener al menos 8 caracteres, con letras y números");
                 return;
             }
-        
+
+            const registerResponse = await fetchData("URL", "POST", userData);
+
+            if (registerResponse.error) {
+                setError(registerResponse.error);
+                return;
+            }
+
+            if (registerResponse.token) {
+                saveToken(registerResponse.token);
+                alert("¡Registro exitoso!");
+            }
+
             setError(null);
-            console.log("Registro exitoso:", userData);
-            alert("¡Registro exitoso!");
+            
+            setUserData({
+                nickname: "",
+                email: "",
+                password: ""
+            })
+
         
         } catch (error) {
             setError(error.message || "Ocurrió un error");
+
+            
+
         }
         
 

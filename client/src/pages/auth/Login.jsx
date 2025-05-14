@@ -1,8 +1,10 @@
 import { useState } from "react";
+import fetchData from "../../utils/fetch";
+import { saveToken } from "../../utils/localStorage";
 import "./Login.css"
 
 // LOGIN 
-function Login({ }) {
+function Login() {
     const [error, setError] = useState(null);
     const [userData, setUserData] = useState({
         email: "",
@@ -20,15 +22,34 @@ function Login({ }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!userData.email || !userData.password) {
-            setError("Debes completar ambos campos");
-            return;
-        }
+        try {
 
-        setError(null);
-        console.log("Usuario autenticado:", userData);
-        alert("Inicio de sesión exitoso");
+            if (!userData.email || !userData.password) {
+                setError("Debes completar ambos campos");
+                return;
+            }
+
+
+            const loginResponse = await fetchData("URL", "POST", userData);
+
+            if (loginResponse.token) {
+                saveToken(loginResponse.token);
+                alert("Inicio de sesión exitoso");
+            }
+
+            else if (loginResponse.error) {
+                setError(loginResponse.error);
+                return;
+            }
+
+            setError(null);
+            
+        } catch (error) {
+            
+            setError("Hubo un problema con la solicitud. Intenta de nuevo.");
+            
         
+        }
     };
 
 
