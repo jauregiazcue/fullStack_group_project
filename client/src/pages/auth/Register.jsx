@@ -1,6 +1,5 @@
 import { useState } from "react";
 import fetchData from "../../utils/fetchData";
-import { saveToken } from "../../utils/localStorage"; 
 
 function Register({ }) {
     const [error, setError] = useState(null);
@@ -40,7 +39,7 @@ function Register({ }) {
             }
         
             if (!email) {
-                setError("Debes introducir un email válido");
+                setError("Debes introducir un email"); //editado
                 return;
             }
         
@@ -56,7 +55,7 @@ function Register({ }) {
                 return;
             }
 
-            const registerResponse = await fetchData("URL", "POST", userData);
+            const registerResponse = await fetchData("RUTA", "POST", userData); //TODO: editar RUTA
 
             if (registerResponse.error) {
                 setError(registerResponse.error);
@@ -64,10 +63,11 @@ function Register({ }) {
             }
 
             if (registerResponse.token) {
-                saveToken(registerResponse.token);
-                alert("¡Registro exitoso!");
-            }
+                localStorage.setItem('authToken', registerResponse.token);
+                /* alert("¡Registro exitoso!"); */
 
+            } 
+            
             setError(null);
             
             setUserData({
@@ -78,15 +78,13 @@ function Register({ }) {
 
         
         } catch (error) {
-            setError(error.message || "Ocurrió un error");
-
-            
-
+                setError(error.message || "Ocurrió un error");
+                setUserData({ nickname: "", email: "", password: "" }); //limpiar los campos
         }
+    
         
+    
 
-        
-    }
     return (
         <section className="auth_wrapper">
 

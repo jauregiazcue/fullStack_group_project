@@ -1,6 +1,5 @@
 import { useState } from "react";
 import fetchData from "../../utils/fetch";
-import { saveToken } from "../../utils/localStorage";
 import "./Login.css"
 
 // LOGIN 
@@ -24,22 +23,23 @@ function Login() {
 
         try {
 
-            if (!userData.email || !userData.password) {
+            if (!userData.email || userData.email.trim() === "" || !userData.password) {
                 setError("Debes completar ambos campos");
                 return;
             }
 
 
-            const loginResponse = await fetchData("URL", "POST", userData);
+            const loginResponse = await fetchData("RUTA", "POST", userData); //TODO: editar RUTA
 
-            if (loginResponse.token) {
-                saveToken(loginResponse.token);
-                alert("Inicio de sesión exitoso");
-            }
-
-            else if (loginResponse.error) {
+            if (loginResponse.error) {
                 setError(loginResponse.error);
                 return;
+            }
+
+            if (loginResponse.token) {
+            localStorage.setItem('authToken', loginResponse.token);
+            setUserData({ email: "", password: "" }); 
+            /* alert("¡Registro exitoso!"); */
             }
 
             setError(null);
