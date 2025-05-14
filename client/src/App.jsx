@@ -1,11 +1,11 @@
-
+import MatchHistory from './components/matchHistory/matchHistory'
 import './App.css'
 
 function App() {
 
   return (
     <>
-      <h1>Kahottn't</h1>
+      <MatchHistory />
     </>
   )
 }
