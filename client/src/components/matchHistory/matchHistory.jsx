@@ -92,11 +92,15 @@ const displayDetail = (match) =>{
     setDetailActive(true);
     setSelectedMatch(match);
 }
+const hideDetail = () =>{
+    setDetailActive(false);
+    setSelectedMatch(null);
+}
 
     return(
         <div>
             <div>
-                {detailActive && <DetailedMatchHistory match={selectedMatch}/>}
+                {detailActive && <DetailedMatchHistory hideDetail={hideDetail} match={selectedMatch}/>}
             </div>
             {matchHistory.length > 0 ? 
             <ul>
@@ -106,8 +110,7 @@ const displayDetail = (match) =>{
                         <p>Host ID: {match.hostId}</p>
                         <p>Winner: {match.players.reduce((max, player) => {
                             return player.score > max.score ? player : max;
-                        }).name
-                        }</p>
+                        }).name}</p>
                     </li>
                 ))}
             </ul> :

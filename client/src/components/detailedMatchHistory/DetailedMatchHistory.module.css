@@ -1,3 +1,17 @@
 .detailContainer{
-    
+    width:100vw;
+    height:100vw;
+    background-color:rgba(100,100,100,0.5);
+    position:fixed;
+    top:0;
+    left:0;
+    display:flex;
+    justify-content: center;
+}
+
+.historyWrapper{
+    margin-top:5em;
+    background-color:blue;
+    width:800px;
+    height:600px;
 }
