@@ -11,8 +11,6 @@ import {
 
 async function register(userData) {
 
-    console.log(userData);
-
     if (!userData.nickname) {
         throw new UserNicknameNotProvided();
     }
@@ -23,7 +21,7 @@ async function register(userData) {
         throw new UserPasswordNotProvided();
     }
 
-    const oldUser = await User.findOne(userData.email);
+    const oldUser = await User.findOne({email: userData.email});
 
     if (oldUser) {
         throw new UserEmailAlreadyExists();
@@ -32,7 +30,6 @@ async function register(userData) {
     const hashedPassword = await hash(userData.password);
 
     userData.password = hashedPassword;
-
     const newUser = new User(userData);
     await newUser.save();
 

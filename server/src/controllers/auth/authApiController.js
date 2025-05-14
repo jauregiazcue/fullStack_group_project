@@ -24,17 +24,12 @@ async function login(req, res) {
         const { email, password } = req.body;
         const user = await authController.login(email, password);
 
-        const isMatch = await compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).json({ error: "Invalid credentials" });
-        }
-
         const payload = {
             _id:user._id,
         };
 
         const token = createToken(payload);
-        res.json({ result,token });
+        res.json({ token });
 
     } catch (error) {
 
