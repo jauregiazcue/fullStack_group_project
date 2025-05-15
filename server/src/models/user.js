@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
     createdAt:{
         type:Date,
         default:Date.now
+    },
+    wins:{
+        type:Number,
+        default: 0
     }
 });
 

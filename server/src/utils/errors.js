@@ -20,12 +20,7 @@ class UserPasswordNotProvided extends Error {
         this.statusCode = 400;
     }
 }
-class UserRoleIncorrect extends Error {
-    constructor(){
-        super("User role is not correct, it must be 'client' or 'seller'");
-        this.statusCode = 400;
-    }
-}
+
 class UserEmailAlreadyExists extends Error{
     constructor(){
         super("User email already exists");
@@ -39,11 +34,18 @@ class UserInvalidCredentials extends Error {
     }
 }
 
+class UserDoesNotExist extends Error {
+    constructor(){
+        super("User does not exist");
+        this.statusCode = 204;
+    }
+}
+
 export {
     UserNicknameNotProvided,
     UserEmailNotProvided,
     UserPasswordNotProvided,
-    UserRoleIncorrect,
     UserEmailAlreadyExists,
     UserInvalidCredentials,
+    UserDoesNotExist
 }
