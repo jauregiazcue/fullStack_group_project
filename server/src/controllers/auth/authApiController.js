@@ -29,7 +29,7 @@ async function login(req, res) {
         };
 
         const token = createToken(payload);
-        res.json({ token });
+        res.json({ token, user });
 
     } catch (error) {
 
