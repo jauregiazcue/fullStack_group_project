@@ -6,7 +6,7 @@ function isLoggedInAPI(req,res,next){
     console.log("authorization",authorization);
     
     if(!authorization){
-        res.status(401).json({error:"You shall not pass"});
+        res.status(401).json({error:"You need authorization for this"});
     }
 
     let token = authorization.split(" "); // si no hay bearer espacio fallaria
@@ -21,7 +21,7 @@ function isLoggedInAPI(req,res,next){
         }
         next();
     }else{
-        res.status(401).json({error:"You shall not pass"});
+        res.status(401).json({error:"You need authorization for this"});
     }
 }
 

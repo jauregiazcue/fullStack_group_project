@@ -2,11 +2,19 @@ import User from "../../models/user.js";
 import { UserDoesNotExist } from "../../utils/errors.js"
 
 async function getUserById(userId) {
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).select("-password");
     if(user === null){
         throw new UserDoesNotExist();
     }
     return user;
+}
+
+async function getUserNickname(userId) {
+    const user = await User.findById(userId);
+    if(user === null){
+        throw new UserDoesNotExist();
+    }
+    return user.nickname;
 }
 
 async function getUserWins(userId) {
@@ -17,16 +25,22 @@ async function getUserWins(userId) {
     return user.wins;
 }
 
-async function deleteUser(userId){
+async function editUserNickname(id,data) {
+    const user = await User.findByIdAndUpdate(id, data).select("-password");
+    return user;
+}
+
+async function removeUser(userId){
     const user = await User.findByIdAndDelete(userId);
     if(user === null){
         throw new UserDoesNotExist();
     }
-    return user;
 }
 
-export {
+export default {
     getUserWins,
-    deleteUser,
-    getUserById
+    getUserById,
+    getUserNickname,
+    editUserNickname,
+    removeUser
 }

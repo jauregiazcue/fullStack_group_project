@@ -19,6 +19,24 @@ async function getUserById(req, res) {
     }
 }
 
+async function getUserNickname(req, res) {
+    try {
+        const id = req.params.id;
+        const result = await userController.getUserNickname(id);
+        res.json(result);
+
+    } catch (error) {
+
+        console.error(error);
+        if (error.statusCode) {
+            res.status(error.statusCode).json({ error: error.message });
+        } else {
+            res.status(500).json({ error: "Internal server error" });
+        }
+
+    }
+}
+
 async function getUserWins(req, res) {
     try {
         const id = req.params.id;
@@ -37,10 +55,29 @@ async function getUserWins(req, res) {
     }
 }
 
-async function deleteUser(req, res) {
+async function editUserNickname(req, res) {
     try {
         const id = req.params.id;
-        const result = await userController.deleteUser(id);
+        const data = req.body;
+        const result = await userController.editUserNickname(id, data);
+        res.json(result);
+
+    } catch (error) {
+
+        console.error(error);
+        if (error.statusCode) {
+            res.status(error.statusCode).json({ error: error.message });
+        } else {
+            res.status(500).json({ error: "Internal server error" });
+        }
+
+    }
+}
+
+async function removeUser(req, res) {
+    try {
+        const id = req.params.id;
+        const result = await userController.removeUser(id);
         res.json(result);
 
     } catch (error) {
@@ -57,5 +94,8 @@ async function deleteUser(req, res) {
 
 export default {
     getUserWins,
-    getUserById
+    getUserById,
+    getUserNickname,
+    editUserNickname,
+    removeUser
 }
