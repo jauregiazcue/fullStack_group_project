@@ -16,14 +16,16 @@ async function createQuestionnaire(data) {
   return questionnaire;
 }
 
-async function editQuestionnaire(id,data) {
-  const questionnaire = await questionnaireModel.findByIdAndUpdate(id,data,{ new: true });
+async function editQuestionnaire(id, data) {
+  const questionnaire = await questionnaireModel.findByIdAndUpdate(id, data, { new: true });
   return questionnaire;
 }
 
-async function deleteQuestionnaire(id) {
+async function removeQuestionnaire(id) {
   const questionnaire = await questionnaireModel.findByIdAndDelete(id);
-  return questionnaire;
+  if (questionnaire === null) {
+    throw new Error("The questionnaire does not exist");
+  }
 }
 
 
@@ -32,5 +34,5 @@ export default {
   getQuestionnaireById,
   createQuestionnaire,
   editQuestionnaire,
-  deleteQuestionnaire,
+  removeQuestionnaire,
 }

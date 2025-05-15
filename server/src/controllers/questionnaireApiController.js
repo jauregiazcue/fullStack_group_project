@@ -44,10 +44,10 @@ async function editQuestionnaire(req, res) {
   }
 }
 
-async function deleteQuestionnaire(req, res) {
+async function removeQuestionnaire(req, res) {
   try {
     const id = req.params.id;
-    const questionnaire = await questionnaireController.deleteQuestionnaire(id);
+    const questionnaire = await questionnaireController.removeQuestionnaire(id);
     res.json(questionnaire);
   } catch (error) {
     console.error(error);
@@ -61,5 +61,5 @@ export default {
   getQuestionnaireById,
   createQuestionnaire,
   editQuestionnaire,
-  deleteQuestionnaire,
+  removeQuestionnaire,
 }

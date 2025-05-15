@@ -13,7 +13,7 @@ router.post("/",questionnaireController.createQuestionnaire);
 router.put("/:id/edit",questionnaireController.editQuestionnaire);
 
 //DELETE ROUTES
-router.delete("/:id/delete",questionnaireController.deleteQuestionnaire);
+router.delete("/:id/delete",questionnaireController.removeQuestionnaire);
 
 
 export default router;

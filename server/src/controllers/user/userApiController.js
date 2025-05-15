@@ -78,7 +78,8 @@ async function removeUser(req, res) {
     try {
         const id = req.params.id;
         const result = await userController.removeUser(id);
-        res.json(result);
+        res.json(result === 1 ? "User correctly removed" :
+            "There has been an error in the removing process");
 
     } catch (error) {
 
