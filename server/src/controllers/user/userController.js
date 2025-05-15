@@ -26,7 +26,7 @@ async function getUserWins(userId) {
 }
 
 async function editUserNickname(id,data) {
-    const user = await User.findByIdAndUpdate(id, data).select("-password");
+    const user = await User.findByIdAndUpdate(id, data, {new: true}).select("-password");
     return user;
 }
 
