@@ -6,7 +6,7 @@ import {
     UserPasswordNotProvided,
     UserEmailAlreadyExists,
     UserInvalidCredentials
-} from "../../utils/errors.js";
+} from "../../utils/errors/userErrors.js";
 
 
 async function register(userData) {

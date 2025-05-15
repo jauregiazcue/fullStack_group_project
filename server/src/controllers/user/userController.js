@@ -1,5 +1,5 @@
 import User from "../../models/user.js";
-import { UserDoesNotExist } from "../../utils/errors.js"
+import { UserDoesNotExist } from "../../utils/errors/userErrors.js"
 
 async function getUserById(userId) {
     const user = await User.findById(userId).select("-password");
