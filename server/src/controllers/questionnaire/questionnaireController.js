@@ -1,4 +1,4 @@
-import questionnaireModel from "../models/questionnaire.js";
+import questionnaireModel from "../../models/questionnaire.js";
 
 async function getQuestionnaires() {
   const questionnaires = await questionnaireModel.find();

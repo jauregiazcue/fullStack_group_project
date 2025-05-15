@@ -1,5 +1,5 @@
 import { Router } from "express";
-import questionnaireController from "../controllers/questionnaireApiController.js";
+import questionnaireController from "../controllers/questionnaire/questionnaireApiController.js";
 const router = Router();
 
 //GET ROUTES
