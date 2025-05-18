@@ -1,5 +1,6 @@
 import { createToken } from "../../utils/token.js";
 import authController from "./authController.js";
+import User from "../../models/user.js";
 
 async function register(req, res) {
     try {
@@ -20,7 +21,6 @@ async function register(req, res) {
 }
 async function login(req, res) {
     try {
-        console.log(req)
         const { email, password } = req.body;
         const user = await authController.login(email, password);
 
@@ -29,6 +29,7 @@ async function login(req, res) {
         };
 
         const token = createToken(payload);
+        const userData = await User.findOne({email}).select("-password");
         res.json({ token, user });
 
     } catch (error) {
