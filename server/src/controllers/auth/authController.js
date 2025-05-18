@@ -46,7 +46,7 @@ async function login(email, password) {
         throw new UserPasswordNotProvided();
     }
 
-    const user = await User.findOne({email});
+    const user = await User.findOne({email}).select("-password");
 
     if (!user) throw new UserInvalidCredentials();
 
