@@ -6,6 +6,14 @@ class QuestionnaireDoesNotExist extends Error {
     }
 }
 
+class OwnerDoesNotHaveAnyQuestionnaires extends Error {
+    constructor(){
+        super("Questionnaire does not exist");
+        this.statusCode = 204;
+    }
+}
+
 export  {
-    QuestionnaireDoesNotExist
+    QuestionnaireDoesNotExist,
+    OwnerDoesNotHaveAnyQuestionnaires
 }
