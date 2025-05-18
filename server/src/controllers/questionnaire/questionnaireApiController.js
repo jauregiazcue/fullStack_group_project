@@ -21,6 +21,17 @@ async function getQuestionnaireById(req, res) {
   }
 }
 
+async function getQuestionnairesByOwnerId(req, res) {
+  try {
+    const owner = req.params.owner;
+    const questionnaires = await questionnaireController.getQuestionnairesByOwnerId(owner);
+    res.json(questionnaires);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+}
+
 async function createQuestionnaire(req, res) {
   try {
     const data = req.body;
@@ -60,6 +71,7 @@ async function removeQuestionnaire(req, res) {
 export default {
   getQuestionnaires,
   getQuestionnaireById,
+  getQuestionnairesByOwnerId,
   createQuestionnaire,
   editQuestionnaire,
   removeQuestionnaire,

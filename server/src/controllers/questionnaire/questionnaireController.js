@@ -10,6 +10,13 @@ async function getQuestionnaireById(id) {
   return questionnaire;
 }
 
+async function getQuestionnairesByOwnerId(owner) {
+  const questionnaires = await questionnaireModel.find(({
+    $where: () => { return this.owner === owner; }
+  }));
+  return questionnaires;
+}
+
 async function createQuestionnaire(data) {
   const questionnaire = new questionnaireModel(data);
   await questionnaire.save();
@@ -32,6 +39,7 @@ async function removeQuestionnaire(id) {
 export default {
   getQuestionnaires,
   getQuestionnaireById,
+  getQuestionnairesByOwnerId,
   createQuestionnaire,
   editQuestionnaire,
   removeQuestionnaire,

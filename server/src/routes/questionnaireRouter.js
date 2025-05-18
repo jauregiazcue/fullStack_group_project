@@ -7,6 +7,7 @@ const router = Router();
 //GET ROUTES
 router.get("/",questionnaireController.getQuestionnaires);
 router.get("/:id",questionnaireController.getQuestionnaireById);
+router.get("/o/:owner",questionnaireController.getQuestionnairesByOwnerId);
 
 //POST ROUTES
 router.post("/:owner",isLoggedInAPI,questionnaireController.createQuestionnaire);
