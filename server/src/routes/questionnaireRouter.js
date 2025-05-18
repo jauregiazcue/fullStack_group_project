@@ -9,13 +9,13 @@ router.get("/",questionnaireController.getQuestionnaires);
 router.get("/:id",questionnaireController.getQuestionnaireById);
 
 //POST ROUTES
-router.post("/",isLoggedInAPI,questionnaireController.createQuestionnaire);
+router.post("/:owner",isLoggedInAPI,questionnaireController.createQuestionnaire);
 
 //PUT ROUTES
-router.put("/:id/edit",isLoggedInAPI,questionnaireController.editQuestionnaire);
+router.put("/:owner/:id/edit",isLoggedInAPI,questionnaireController.editQuestionnaire);
 
 //DELETE ROUTES
-router.delete("/:id/delete",isLoggedInAPI,questionnaireController.removeQuestionnaire);
+router.delete("/:owner/:id/delete",isLoggedInAPI,questionnaireController.removeQuestionnaire);
 
 
 export default router;

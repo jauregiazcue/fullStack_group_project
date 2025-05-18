@@ -24,6 +24,7 @@ async function getQuestionnaireById(req, res) {
 async function createQuestionnaire(req, res) {
   try {
     const data = req.body;
+    data.owner = req.params.owner;
     const questionnaire = await questionnaireController.createQuestionnaire(data);
     res.json(questionnaire);
   } catch (error) {
