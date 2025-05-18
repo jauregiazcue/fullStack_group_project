@@ -11,9 +11,18 @@ const playerSchema = new mongoose.Schema({
         ref: "Game",
         required: true
     },
-    userId
+    gamePoints:{
+        type:Number,
+        default:0
+    },
+    socketId: {
+        type: String
+    }
 });
 
 const playerModel = mongoose.model("Player", playerSchema);
 
-export default playerModel;
+export default {
+    playerModel,
+    playerSchema
+};
