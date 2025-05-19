@@ -66,7 +66,7 @@ async function removeQuestionnaire(req, res) {
     const id = req.params.id;
     const result = await questionnaireController.removeQuestionnaire(id);
     res.json(result === 1 ? "User correctly removed" :
-            "There has been an error in the removing process");
+      "There has been an error in the removing process");
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server error" });
