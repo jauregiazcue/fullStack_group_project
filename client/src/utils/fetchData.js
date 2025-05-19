@@ -1,5 +1,5 @@
 import { getToken } from "./localStorage.js";
-const BASE_URL = "URL"; //TODO: pasar url
+const BASE_URL = "http://localhost:3000"; //TODO: pasar url
 
 async function fetchData(route, method="GET", data=null) {
     const url = BASE_URL + route;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import fetchData from "../../utils/fetch";
+import fetchData from "../../utils/fetchData";
 import "./Login.css"
 
 // LOGIN 
@@ -29,7 +29,7 @@ function Login() {
             }
 
 
-            const loginResponse = await fetchData("RUTA", "POST", userData); //TODO: editar RUTA
+            const loginResponse = await fetchData("/login", "POST", userData); 
 
             if (loginResponse.error) {
                 setError(loginResponse.error);
@@ -39,7 +39,7 @@ function Login() {
             if (loginResponse.token) {
             localStorage.setItem('authToken', loginResponse.token);
             setUserData({ email: "", password: "" }); 
-            /* alert("¡Registro exitoso!"); */
+            alert("Login exitoso!");
             }
 
             setError(null);
