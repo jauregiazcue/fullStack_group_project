@@ -1,7 +1,7 @@
 import History from "../models/history.js";
-import Questionnaire from "../models/questionnaire.js";
+import questionnaireController from "./questionnaire/questionnaireController.js";
 import userController from "./user/userController.js";
-
+import historyErrors from "../../utils/historyErrors.js";
 
 
 async function createNewHistory(userId, questionnaireId, playersData) {
@@ -10,8 +10,10 @@ async function createNewHistory(userId, questionnaireId, playersData) {
 
     const questionnaire = await getQuestionnaireById(questionnaireId);
 
+    if (!questionnaire) throw new Error('Questionnaire not found');
+
     if (!playersData || !Array.isArray(playersData)) {
-        throw new Error("Debe introducir un array de jugadores");
+        throw new ArrayRequired();
     }
 
     let playersList = [];
@@ -20,13 +22,13 @@ async function createNewHistory(userId, questionnaireId, playersData) {
     const playerData = playersData[i];
 
     if (!playerData.hasOwnProperty("nickname")) { 
-      throw new Error("Falta el nickname para el jugador:" + i);
+      throw new MissingNicknameForPlayerIndex(i);
     }
 
     const nickname = playerData.nickname;
 
     if (typeof nickname !== "string" || nickname.trim() === "") {
-      throw new Error("Nickname inválido para el jugador:" + i);
+      throw new InvalidNicknameForPlayerIndex(i);
     }
 
     const player = {
@@ -53,7 +55,7 @@ async function getHistoryById(historyId) {
     .populate("user", "_id nickname")
     .populate("questionnaire_id", "title"); 
   if (history === null) {
-    throw new Error("Historial no encontrado");
+    throw new HistoryNotFound();
   }
   return history;
 }
