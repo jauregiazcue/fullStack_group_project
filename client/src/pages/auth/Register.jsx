@@ -55,7 +55,7 @@ function Register({ }) {
                 return;
             }
 
-            const registerResponse = await fetchData("RUTA", "POST", userData); //TODO: editar RUTA
+            const registerResponse = await fetchData("/register", "POST", userData);
 
             if (registerResponse.error) {
                 setError(registerResponse.error);

@@ -1,6 +1,5 @@
 import { getToken } from "./localStorage.js";
-import { getToken } from "../utils/localStorage";
-const BASE_URL = "URL"; //TODO: pasar url
+const BASE_URL = "http://localhost:3000"; //TODO: pasar url
 
 async function fetchData(route, method="GET", data=null) {
     const url = BASE_URL + route;
@@ -9,6 +8,7 @@ async function fetchData(route, method="GET", data=null) {
         method: method,
         headers: {}
     };
+
     
     if (token) {
         options.headers["Authorization"] = `Bearer ${token}`;
