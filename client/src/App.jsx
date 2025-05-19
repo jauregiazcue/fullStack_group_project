@@ -1,11 +1,12 @@
 
 import './App.css'
+import Register from './pages/auth/Register'
 
 function App() {
 
   return (
     <>
-      <h1>Kahottn't</h1>
+      <Register />
     </>
   )
 }

@@ -1,14 +1,14 @@
-import { getToken } from "../utils/localStorage";
-
+import { getToken } from "./localStorage.js";
 const BASE_URL = "URL"; //TODO: pasar url
 
 async function fetchData(route, method="GET", data=null) {
     const url = BASE_URL + route;
     const token = getToken();
-    const options = { 
+    const options = {
         method: method,
-        headers: {} 
+        headers: {}
     };
+
     
     if (token) {
         options.headers["Authorization"] = `Bearer ${token}`;
