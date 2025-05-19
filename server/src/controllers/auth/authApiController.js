@@ -30,7 +30,7 @@ async function login(req, res) {
 
         const token = createToken(payload);
         const userData = await User.findOne({email}).select("-password");
-        res.json({ token, user });
+        res.json({ token, userData });
 
     } catch (error) {
 
