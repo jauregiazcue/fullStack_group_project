@@ -1,7 +1,12 @@
 import History from "../models/history.js";
 import questionnaireController from "./questionnaire/questionnaireController.js";
 import userController from "./user/userController.js";
-import historyErrors from "../../utils/historyErrors.js";
+import {
+    HistoryNotFound,
+    InvalidNicknameForPlayerIndex,
+    MissingNicknameForPlayerIndex,
+    ArrayRequired
+}from "../../utils/historyErrors.js";
 
 
 async function createNewHistory(userId, questionnaireId, playersData) {
