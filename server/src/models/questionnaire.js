@@ -20,11 +20,11 @@ const questionnaireSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  /*owner: {
+  owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: false
-  }*/
+    required: true
+  }
 });
 
 export default mongoose.model("Questionnaire", questionnaireSchema);
