@@ -30,8 +30,8 @@ async function getQuestionnairesByOwnerId(owner) {
 
 async function createQuestionnaire(data) {
   if (!data.title) throw new TitleNotProvided();
-  if (!questions) throw new QuestionsNotProvided();
-  if (!owner) throw new OwnerNotProvided();
+  if (!data.questions) throw new QuestionsNotProvided();
+  if (!data.owner) throw new OwnerNotProvided();
 
   const questionnaire = new questionnaireModel(data);
   await questionnaire.save();
@@ -39,8 +39,13 @@ async function createQuestionnaire(data) {
 }
 
 async function editQuestionnaire(id, data) {
+  let questionnaire = await questionnaireModel.findById(id);
 
-  const questionnaire = await questionnaireModel.findByIdAndUpdate(id, data, { new: true });
+  if (!data.title) data.title = questionnaire.title;
+  if (!data.questions) data.questions = questionnaire.questions;
+  if (!data.owner) data.owner = questionnaire.owner;
+
+  questionnaire = await questionnaireModel.findByIdAndUpdate(id, data, { new: true });
   return questionnaire;
 }
 
