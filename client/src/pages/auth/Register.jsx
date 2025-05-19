@@ -81,12 +81,8 @@ function Register({ }) {
                 setError(error.message || "Ocurrió un error");
                 setUserData({ nickname: "", email: "", password: "" }); //limpiar los campos
         }
-
     }
     
-        
-    
-
     return (
         <section className="auth_wrapper">
 
