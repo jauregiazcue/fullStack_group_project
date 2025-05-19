@@ -1,5 +1,5 @@
 import Player from "../../models/player.js";
-//import Game from "../../models/game.js";
+import Game from "../../models/game.js";
 import { PlayerAlredyExist, PlayerDoesNotExist } from "../../utils/errors/playerErrors.js";
 
 
@@ -16,7 +16,7 @@ async function createPlayer(nickname, gameId) {
     const gameSession = await Game.findOne({ code: gameId }).populate("players");
 
     if (gameSession.players.some(player => player.nickname === nickname)) {
-        return new PlayerAlredyExist;
+        return new PlayerAlredyExist();
     }
 
     const newPlayer = new Player({ nickname: nickname, gameId: gameId })
@@ -34,7 +34,7 @@ async function editPlayer(gameId, playerId, data) {
     const gameSession = await Game.findOne({ code: gameId }).populate("players");
 
     if (gameSession.players.some(player => player.nickname === nickname)) {
-        return new PlayerAlredyExist;
+        return new PlayerAlredyExist();
     }
 
     const player = await Player.findByIdAndUpdate(playerId, data, { new: true });

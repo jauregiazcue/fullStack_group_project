@@ -1,13 +1,14 @@
 import gameController from "./gameController.js";
 
-async function getGames(req, res) {
-  try {
-    const games = await gameController.getGames();
-    res.json(games);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server error" });
-  }
+function startTimer(io, timer = 30) {
+  const interval = setInterval(() => {
+    timer--;
+    console.log("timer", timer);
+    if (timer === 0) {
+      clearInterval(interval);
+    }
+    io.emit("timer", timer);
+  }, 1000);
 }
 
 async function getGameById(req, res) {
