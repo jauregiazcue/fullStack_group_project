@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../finzen-front"
+		},
+		{
+			"path": "../finzen"
+		},
+		{
+			"path": "../../mongo/kkhoot"
+		}
+	],
+	"settings": {}
+}

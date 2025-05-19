@@ -2,10 +2,10 @@
 import React from "react";
 import "./Avatar.css";
 
-const Avatar = ({ avatarImageUrl }) => {
+const Avatar = ({ avatarImageUrl, onClick }) => {
     return (
       <div className="avatar__container">
-        <img src={avatarImageUrl} alt="avatar" />
+        <img src={avatarImageUrl} alt="avatar" onClick={onClick}/>
       </div>
     );
 };

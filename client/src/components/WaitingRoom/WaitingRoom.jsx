@@ -1,34 +1,34 @@
 import "./WaitingRoom.css";
 import { useState } from "react";
+import {useLoaderData} from "react-router-dom";
+import WaitingList from "./WaitingList";
+import AvatarSelector from "../Avatar/AvatarSelector";
 
-function WaitingRoom({ webSocket }) {
-  const { users, setUsers } = setState();
+function WaitingRoom() {
+  const [players, setPlayers] = useState([]);
+  const [avatars, setAvatars] = useState([]);
 
+  const useEffect(() => {
+    setPlayers(players);
+  }, [players]);
+
+  const useEffect(() => {
+    setAvatars(loaderAvatars);
+  }, [avatars]);
   //manejador cuando un usuario entra a la sala de espera
-  const handleEntry = () => {
-    webSocket.emit("entry");
-  };
 
   return (
-    <section className="waiting__container">
-      <section className="waiting__section">
+    <section className="waiting-room__container">
+      <section className="waiting-list__container">
         <h1>Waiting Room</h1>
-        <div className="waiting__users">
-          {users.map((user) => {
-            return (
-              <div className="waiting__user">
-                <WaitingUser
-                  key={user.id}
-                  user={user}
-                  webSocket={webSocket}
-                  setUsers={setUsers} />
-              </div>
-            );
-          })}
-        </div>
+        <WaitingList players={players}/>
+      </section>
+      <section className="avatar-selector__container">
+        <h1>Select your avatar</h1>
+        <AvatarSelector player={player} setPlayer={setPlayer} avatars={avatars} /> {/*???: si AvatarSelector necesita un player solo, como se lo paso si aqui tengo el array con todos*/}
       </section>
     </section>
-  );
+  )
 }
 
 export default WaitingRoom;
