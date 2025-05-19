@@ -6,7 +6,7 @@ import {
     InvalidNicknameForPlayerIndex,
     MissingNicknameForPlayerIndex,
     ArrayRequired
-}from "../../utils/historyErrors.js";
+} from "../../utils/historyErrors.js";
 
 
 async function createNewHistory(userId, questionnaireId, playersData) {
