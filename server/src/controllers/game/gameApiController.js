@@ -14,8 +14,8 @@ function startTimer(io, timer = 30) {
 
 async function getGameById(req, res) {
   try {
-    const id = req.params.id;
-    res.json(await getGameById(id));
+    const id = req.params.gameId;
+    res.json(await gameController.getGameById(id));
   } catch (error) {
     console.error(error);
     if (error.statusCode) {
@@ -29,8 +29,8 @@ async function getGameById(req, res) {
 async function createGame(req, res) {
   try {
     const host = req.body.host;
-    const questionnaireId = req.params.id;
-    res.json(await createGame(host, questionnaireId));
+    const questionnaireId = req.params.questionnaireId;
+    res.json(await gameController.createGame(host, questionnaireId));
   } catch (error) {
     console.error(error);
     if (error.statusCode) {
@@ -41,11 +41,11 @@ async function createGame(req, res) {
   }
 }
 
-async function joinPlayer(req, res) { //meter _id
+async function joinPlayer(req, res) { 
   try {
     const nickname = req.body.nickname;
-    const id = req.params.id;
-    res.json(await joinPlayer(nickname, id));
+    const id = req.params.gameId;
+    res.json(await gameController.joinPlayer(nickname, id));
   } catch (error) {
     console.error(error);
     if (error.statusCode) {
@@ -58,10 +58,10 @@ async function joinPlayer(req, res) { //meter _id
 
 async function startGame(req, res) {
   try {
-    const id = req.params.id;
+    const id = req.params.gameId;
     const io = req.io;
 
-    const game = await startGame(id);
+    const game = await gameController.startGame(id);
     io.emit("GameStarted", game);
     startTimer(io);
     res.json(game);
@@ -77,10 +77,10 @@ async function startGame(req, res) {
 
 async function nextQuestion(req, res) {
   try {
-    const id = req.params.id;
+    const id = req.params.gameId;
     const io = req.io;
 
-    const question = await nextQuestion(id);
+    const question = await gameController.nextQuestion(id);
     if (!question) {
       io.emit("GameFinished", gameModel.findById(id));
       res.json("Game has been finished");
@@ -100,8 +100,8 @@ async function nextQuestion(req, res) {
 
 async function getQuestion(req, res) {
   try {
-    const id = req.params.id;
-    res.json(await getQuestion(id));
+    const id = req.params.gameId;
+    res.json(await gameController.getQuestion(id));
   } catch (error) {
     console.error(error);
     if (error.statusCode) {
