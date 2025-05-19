@@ -1,7 +1,10 @@
 import questionnaireModel from "../../models/questionnaire.js";
 import {
   QuestionnaireDoesNotExist,
-  OwnerDoesNotHaveAnyQuestionnaires
+  OwnerDoesNotHaveAnyQuestionnaires,
+  TitleNotProvided,
+  QuestionsNotProvided,
+  OwnerNotProvided
 } from "../../utils/errors/questionnaireErrors.js"
 
 async function getQuestionnaires() {
@@ -20,20 +23,23 @@ async function getQuestionnairesByOwnerId(owner) {
   const questionnaires = await questionnaireModel.find(({
     $where: () => { return this.owner === owner; }
   }));
-  if(!questionnaires) throw new OwnerDoesNotHaveAnyQuestionnaires();
+  if (!questionnaires) throw new OwnerDoesNotHaveAnyQuestionnaires();
 
   return questionnaires;
 }
 
 async function createQuestionnaire(data) {
-  //HANDLE ERRORS
+  if (!data.title) throw new TitleNotProvided();
+  if (!questions) throw new QuestionsNotProvided();
+  if (!owner) throw new OwnerNotProvided();
+
   const questionnaire = new questionnaireModel(data);
   await questionnaire.save();
   return questionnaire;
 }
 
 async function editQuestionnaire(id, data) {
-  //HANDLE ERRORS
+
   const questionnaire = await questionnaireModel.findByIdAndUpdate(id, data, { new: true });
   return questionnaire;
 }
