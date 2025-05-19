@@ -8,6 +8,7 @@ function App() {
 
   return (
     <>
+    <!-- This is just testing stuff and can safely be ignored-->
       <QuestionComponent />
       <MatchHistory />
     </>
