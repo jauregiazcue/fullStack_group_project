@@ -1,4 +1,5 @@
 import gameController from "./gameController.js";
+import gameModel from "../../models/game.js";
 
 function startTimer(io, timer = 30) {
   const interval = setInterval(() => {
@@ -14,42 +15,108 @@ function startTimer(io, timer = 30) {
 async function getGameById(req, res) {
   try {
     const id = req.params.id;
-    const games = await gameController.getGameById(id);
-    res.json(games);
+    res.json(await getGameById(id));
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server error" });
+    if (error.statusCode) {
+      res.status(error.statusCode).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
   }
 }
 
 async function createGame(req, res) {
   try {
-    const data = req.body;
-    data.owner = req.params.owner;
-    const game = await gameController.createGame(data);
+    const host = req.body.host;
+    const questionnaireId = req.params.id;
+    res.json(await createGame(host, questionnaireId));
+  } catch (error) {
+    console.error(error);
+    if (error.statusCode) {
+      res.status(error.statusCode).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+}
+
+async function joinPlayer(req, res) { //meter _id
+  try {
+    const nickname = req.body.nickname;
+    const id = req.params.id;
+    res.json(await joinPlayer(nickname, id));
+  } catch (error) {
+    console.error(error);
+    if (error.statusCode) {
+      res.status(error.statusCode).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+}
+
+async function startGame(req, res) {
+  try {
+    const id = req.params.id;
+    const io = req.io;
+
+    const game = await startGame(id);
+    io.emit("GameStarted", game);
+    startTimer(io);
     res.json(game);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server error" });
+    if (error.statusCode) {
+      res.status(error.statusCode).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
   }
 }
 
-async function removeGame(req, res) {
+async function nextQuestion(req, res) {
   try {
     const id = req.params.id;
-    const result = await gameController.removeGame(id);
-    res.json(result === 1 ? "User correctly removed" :
-      "There has been an error in the removing process");
+    const io = req.io;
+
+    const question = await nextQuestion(id);
+    if (!question) {
+      io.emit("GameFinished", gameModel.findById(id));
+      res.json("Game has been finished");
+    }
+    io.emit("NextQuestion", question);
+    startTimer(io, question.timer || 30);
+    res.json(question);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server error" });
+    if (error.statusCode) {
+      res.status(error.statusCode).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
   }
 }
 
+async function getQuestion(req, res) {
+  try {
+    const id = req.params.id;
+    res.json(await getQuestion(id));
+  } catch (error) {
+    console.error(error);
+    if (error.statusCode) {
+      res.status(error.statusCode).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+}
 
 export default {
-  getGames,
   getGameById,
   createGame,
-  removeGame,
+  joinPlayer,
+  startGame,
+  nextQuestion,
+  getQuestion
 }
