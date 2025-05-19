@@ -12,7 +12,7 @@ const gameSchema = new mongoose.Schema({
   },
   state: {
     type: String,
-    enum: ["pending","started","finished"],
+    enum: ["pending", "started", "finished"],
     default: "pending",
     required: true
   },
@@ -31,6 +31,11 @@ const gameSchema = new mongoose.Schema({
   players: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Player",
+    required: true
+  },
+  host: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
     required: true
   }
 });
