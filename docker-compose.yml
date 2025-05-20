@@ -1,18 +1,32 @@
 services:
-
-  app:
+  server:
     container_name: ${APP_HOST}
-    build: .
+    build: ./server
     restart: unless-stopped
     ports:
       - ${APP_PORT}:3000
     volumes:
-      - .:/app
-      - node_modules:/app/node_modules
+      - ./server:/app
+      - server_node_modules:/app/node_modules
     networks:
       - erraton_network
+
+  client:
+    container_name: ${CLIENT_HOST}
+    build: ./client
+    restart: unless-stopped
+    ports:
+      - ${CLIENT_PORT}:5173
+    volumes:
+      - ./client:/app
+      - client_node_modules:/app/node_modules
+    networks:
+      - erraton_network
+    command: ["npm", "run", "dev", "--", "--host"]
+
   mongo:
     image: mongo
+    command: ["mongod", "--quiet"]
     container_name: ${DB_HOST}
     restart: unless-stopped
     environment:
@@ -23,9 +37,10 @@ services:
       - ${DB_PORT}:27017
     networks:
       - erraton_network
-  
+
 volumes:
-  node_modules:
+  server_node_modules:
+  client_node_modules:
+
 networks:
   erraton_network:
-    
