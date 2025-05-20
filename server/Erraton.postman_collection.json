@@ -1,0 +1,340 @@
+{
+	"info": {
+		"_postman_id": "c279c764-efea-4fa9-b2bb-28bdab3b4ad0",
+		"name": "Erraton",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43976465",
+		"_collection_link": "https://kaijauregi.postman.co/workspace/Kai-Jauregi's-Workspace~a8e9aba7-a144-4171-87cb-b1d81c64f53d/collection/43976465-c279c764-efea-4fa9-b2bb-28bdab3b4ad0?action=share&source=collection_link&creator=43976465"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"example@email.com\",\n    \"password\": \"1234\",\n    \"nickname\": \"prueba\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"example@email.com\",\n    \"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "user_by_id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/6825ec271f743c7e2d8e65f2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"6825ec271f743c7e2d8e65f2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_wins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/6825ec271f743c7e2d8e65f2/wins",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"6825ec271f743c7e2d8e65f2",
+								"wins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_nick",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/6825ec271f743c7e2d8e65f2/nickname",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"6825ec271f743c7e2d8e65f2",
+								"nickname"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nickname\": \"erraton\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/6825ec271f743c7e2d8e65f2/edit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"6825ec271f743c7e2d8e65f2",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove_user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/6825ec271f743c7e2d8e65f2/delete",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"6825ec271f743c7e2d8e65f2",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "questionnaire",
+			"item": [
+				{
+					"name": "Get Questionnaire",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/questionnaire",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"questionnaire"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Questionnaire Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/questionnaire/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"questionnaire",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Questionnaire",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Title\",\n    \"questions\": [\n        {\n            \"question\":\"#First Text# @incorrect part@ #last text#\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/questionnaire",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"questionnaire"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"New Title\",\n    \"questions\": [\n        {\n            \"question\":\"#First Text# @incorrect part@ #last text#\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/questionnaire/6825cdeda8d8ba0b9fb485b6/edit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"questionnaire",
+								"6825cdeda8d8ba0b9fb485b6",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/questionnaire/6825f0681c05b4d867f76e4f/delete",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"questionnaire",
+								"6825f0681c05b4d867f76e4f",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI1ZWMyNzFmNzQzYzdlMmQ4ZTY1ZjIiLCJpYXQiOjE3NDczMTY0NjYsImV4cCI6MTc0NzQwMjg2Nn0.Yd6NtsiHOyUEr5w84a8c6a7a_dDy6VOAtVIsy7UGsow",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3003",
+			"type": "default"
+		}
+	]
+}
