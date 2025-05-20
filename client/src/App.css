@@ -1,0 +1,41 @@
+:root {
+  --text: #F4EAD5;
+  --background: #2f6568;
+  --strongPrimary: #c38a37;
+  --weakPrimary: #eabe71;
+  --strongSecondary: #2f6568;
+  --weakSecondary: #7d9ea2;
+  --hover: lightgray;
+
+  --backgroundIris: #F4EAD5;
+  --backgroundEye: #0000;
+  --backgrounEyeGradient: #594F4F;
+  
+}
+/* https://codepen.io/t_afif/pen/RwBzKpd */
+body {
+  color: var(--text);
+
+  --s: 80px;
+
+  --_g: radial-gradient(var(--backgroundIris) 31%, var(--backgroundEye) 32%);
+  --_l: radial-gradient(var(--backgrounEyeGradient) 15%, var(--backgroundEye) 16%);
+  background: var(--_l), var(--_l), var(--_g), var(--_g), var(--background);
+  background-position: 0 0, var(--s) var(--s);
+  background-size: calc(2*var(--s)) calc(2*var(--s));
+  animation:
+    x 2s cubic-bezier(0.5, 92, 0.5, -92) infinite,
+    y 2s cubic-bezier(0.5, 92, 0.5, -92) infinite -.5s;
+}
+
+
+@keyframes x {
+  to {
+    background-position-x: -.25px, calc(var(--s) - 1px),-.5px,calc(var(--s) - .5px);
+  }
+}
+@keyframes y {
+  to {
+    background-position-y: -.25px, calc(var(--s) - 1px),.25px,calc(var(--s) - .5px);
+  }
+}

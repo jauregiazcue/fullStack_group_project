@@ -8,11 +8,11 @@ function App() {
 
   return (
     <>
-    <!-- This is just testing stuff and can safely be ignored-->
-      <QuestionComponent />
+      {/** This is just testing stuff and can safely be ignored*/}
+      {/* <QuestionComponent /> */}
       <MatchHistory />
     </>
   )
 }
 
-export default App
+export default App;
