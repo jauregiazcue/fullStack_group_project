@@ -10,9 +10,9 @@ router.get("/",(req,res)=>{
     res.send("hola mundo")
 })
 
-router.use("/questionnaire", questionnaireRouter);
-router.use("/game",gameRouter);
 router.use("/",authRouter);
 router.use("/user",userRouter);
+router.use("/questionnaire", questionnaireRouter);
+router.use("/game",gameRouter);
 
 export default router
