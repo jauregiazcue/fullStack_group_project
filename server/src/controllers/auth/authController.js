@@ -40,6 +40,8 @@ async function register(userData) {
         throw error;
     }
 
+    userData.email = userData.email.toLowerCase();
+
     const oldUser = await User.findOne({email: userData.email});
 
     if (oldUser) {
@@ -49,7 +51,13 @@ async function register(userData) {
     const hashedPassword = await hash(userData.password);
 
     userData.password = hashedPassword;
-    const newUser = new User(userData);
+    
+    const newUser = new User({
+        email: userData.email,
+        nickname: userData.nickname,
+        password: hashedPassword
+    });    
+    
     await newUser.save();
 
     return newUser;
@@ -64,6 +72,8 @@ async function login(email, password) {
     if (!password) {
         throw new UserPasswordNotProvided();
     }
+
+    email = email.toLowerCase();
 
     const user = await User.findOne({email});
 
