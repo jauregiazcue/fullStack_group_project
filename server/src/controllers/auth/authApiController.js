@@ -3,7 +3,6 @@ import authController from "./authController.js";
 import User from "../../models/user.js";
 
 async function register(req, res) {
-    console.log("AAAAAAAAAAA");
     try {
         const result = await authController.register(req.body);
         res.json(result);

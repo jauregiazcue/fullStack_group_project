@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 import fetchData from "../../utils/fetchData";
 import "./Login.css"
 
@@ -55,10 +56,10 @@ function Login() {
                 <input type="password" name="password" id="password" value={userData.password} onChange={handleUserPassword} />
                 <button className="auth__button">Acceder</button>
             </form>
-           {/*  <section className="auth__redirect">
+            <section className="auth__redirect">
                 <p>¿No tienes una cuenta? </p>
-                <Link to="/registro">Regístrate</Link>
-            </section> */}
+                <Link to="/register">Regístrate</Link>
+            </section>
         </section>
     )
 }
