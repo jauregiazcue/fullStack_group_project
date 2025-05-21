@@ -1,24 +1,50 @@
 :root {
   --text: #F4EAD5;
-  --background: #2f6568;
+  --background: #6E7DAB;
+  --backgroundSecond: #575366;
   --strongPrimary: #c38a37;
   --weakPrimary: #eabe71;
   --strongSecondary: #2f6568;
   --weakSecondary: #7d9ea2;
   --hover: lightgray;
 
-  --backgroundIris: #F4EAD5;
-  --backgroundEye: #0000;
-  --backgrounEyeGradient: #594F4F;
-
+  --circleSize: 80px;
 }
 
-html {
-  background-image: conic-gradient(var(--strongPrimary) 90deg, transparent 90deg 360deg);
-  background-color: var(--background);
-  background-size: 100px 100px;
-}
+html {}
+
 body {
-  
+  margin: 0;
+
+  overflow: hidden;
+  background-color: var(--background);
+
 }
 
+body::before {
+  content: "";
+  position: absolute;
+  width: 500vw;
+  height: 500vh;
+  background-image: linear-gradient(
+      45deg,
+      var(--backgroundSecond) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--backgroundSecond) 75%,
+      var(--backgroundSecond)
+    ),
+    linear-gradient(
+      -45deg,
+      var(--backgroundSecond) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--backgroundSecond) 75%,
+      var(--backgroundSecond)
+    );
+
+  background-size: var(--circleSize) var(--circleSize);
+  transform: rotate(0deg) scale(1.45);
+  z-index: -1;
+
+}
