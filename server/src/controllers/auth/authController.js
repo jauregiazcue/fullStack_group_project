@@ -22,7 +22,7 @@ async function register(userData) {
 
     const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-    if (!pwdRegex.test(data.user_pwd)) {
+    if (!pwdRegex.test(userData.password)) {
         const error = new Error('The password must be at least 8 characters long, with letters and numbers');
         error.statusCode = 400;
         throw error;
@@ -34,11 +34,13 @@ async function register(userData) {
 
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-    if (!emailRegex.test(data.user_email)) {
+    if (!emailRegex.test(userData.email)) {
         const error = new Error('The email is not valid');
         error.statusCode = 400;
         throw error;
     }
+
+    userData.email = userData.email.toLowerCase();
 
     const oldUser = await User.findOne({email: userData.email});
 
@@ -49,7 +51,13 @@ async function register(userData) {
     const hashedPassword = await hash(userData.password);
 
     userData.password = hashedPassword;
-    const newUser = new User(userData);
+    
+    const newUser = new User({
+        email: userData.email,
+        nickname: userData.nickname,
+        password: hashedPassword
+    });    
+    
     await newUser.save();
 
     return newUser;
@@ -64,6 +72,8 @@ async function login(email, password) {
     if (!password) {
         throw new UserPasswordNotProvided();
     }
+
+    email = email.toLowerCase();
 
     const user = await User.findOne({email});
 
