@@ -6,7 +6,11 @@ async function getQuestionnaires(req, res) {
     res.json(questionnaires);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server error" });
+    if (error.statusCode) {
+      res.status(error.statusCode).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
   }
 }
 
@@ -17,7 +21,11 @@ async function getQuestionnaireById(req, res) {
     res.json(questionnaires);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server error" });
+    if (error.statusCode) {
+      res.status(error.statusCode).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
   }
 }
 
@@ -28,7 +36,11 @@ async function getQuestionnairesByOwnerId(req, res) {
     res.json(questionnaires);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server error" });
+    if (error.statusCode) {
+      res.status(error.statusCode).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
   }
 }
 
@@ -40,7 +52,11 @@ async function createQuestionnaire(req, res) {
     res.json(questionnaire);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server error" });
+    if (error.statusCode) {
+      res.status(error.statusCode).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
   }
 }
 
@@ -69,7 +85,11 @@ async function removeQuestionnaire(req, res) {
       "There has been an error in the removing process");
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server error" });
+    if (error.statusCode) {
+      res.status(error.statusCode).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
   }
 }
 

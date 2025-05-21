@@ -3,7 +3,10 @@ import dotenv from "dotenv";
 import router from "./routes/router.js";
 import cors from "cors";
 //import cookieParser from "cookie-parser";
+import http from "http";
+import {Server as socketIo} from "socket.io";
 import { connectDB } from "./config/mongoose.js";
+import gameController from "./controllers/game/gameController.js";
 
 dotenv.config();
 connectDB();
@@ -21,13 +24,28 @@ app.use(cors(corsOptions));
 
 app.use(express.json()); // para API (formato json)
 app.use(express.urlencoded({extended:true})); // para Vistas (formato formulario)
-
-
+const httpServer = http.createServer(app);
+const io = new socketIo(httpServer,{
+    cors: {
+        origin:'*',
+    }
+});
+app.use((req,res,next)=> {
+    req.io = io;
+    next();
+});
+io.on("connection", (socket)=> {
+    console.log("Conection", socket.id);
+    socket.on("join",(data)=> {
+        console.log("Join",data,socket.id);
+        gameController.saveSocketIdToPlayer(data.nickname,data.gameId,socket.id);
+    })
+})
 
 app.use("/",router);
 
 
 
-app.listen(3000,()=>{
+httpServer.listen(3000,()=>{
     console.log(`Backend conectado al puerto ${APP_PORT}`);
 })
