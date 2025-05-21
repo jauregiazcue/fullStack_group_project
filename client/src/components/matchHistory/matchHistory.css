@@ -39,7 +39,7 @@
   & li {
     background-color: var(--strongSecondary);
     border: 5px solid var(--strongSecondary);
-    border-radius: 5px;
+    border-radius: 5%;
     text-align: center;
     margin-top: 1em;
     width: 40%;

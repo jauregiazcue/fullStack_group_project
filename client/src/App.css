@@ -13,27 +13,12 @@
 
 }
 
-/* https://codepen.io/t_afif/pen/RwBzKpd */
+html {
+  background-image: conic-gradient(var(--strongPrimary) 90deg, transparent 90deg 360deg);
+  background-color: var(--background);
+  background-size: 100px 100px;
+}
 body {
-  color: var(--text);
-
-  --s: .5vw;
-
-  --_g: radial-gradient(var(--weakSecondary) 31%, var(--strongSecondary) 32%);
-  background: var(--_g), var(--background);
-  background-position: 0 0, var(--s) var(--s);
-  background-size: calc(2*var(--s)) calc(2*var(--s));
-  animation:
-    diagonalAnimation 2s linear infinite;
+  
 }
 
-
-@keyframes diagonalAnimation {
-
-  to {
-    background-position-x: calc(4*var(--s));
-    background-position-y: calc(4*var(--s));
-  }
-
-
-}
