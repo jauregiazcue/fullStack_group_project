@@ -1,50 +1,18 @@
 :root {
   --text: #F4EAD5;
-  --background: #6E7DAB;
-  --backgroundSecond: #575366;
-  --strongPrimary: #c38a37;
+  --background: #27283d;
+  --strongPrimary: #1a1b2d;
   --weakPrimary: #eabe71;
-  --strongSecondary: #2f6568;
-  --weakSecondary: #7d9ea2;
+  --strongSecondary: #c05622;
+  --weakSecondary: #eabe71;
   --hover: lightgray;
 
   --circleSize: 80px;
 }
 
-html {}
-
-body {
-  margin: 0;
-
-  overflow: hidden;
+html {
   background-color: var(--background);
-
+  color: var(--text);
 }
 
-body::before {
-  content: "";
-  position: absolute;
-  width: 500vw;
-  height: 500vh;
-  background-image: linear-gradient(
-      45deg,
-      var(--backgroundSecond) 25%,
-      transparent 25%,
-      transparent 75%,
-      var(--backgroundSecond) 75%,
-      var(--backgroundSecond)
-    ),
-    linear-gradient(
-      -45deg,
-      var(--backgroundSecond) 25%,
-      transparent 25%,
-      transparent 75%,
-      var(--backgroundSecond) 75%,
-      var(--backgroundSecond)
-    );
 
-  background-size: var(--circleSize) var(--circleSize);
-  transform: rotate(0deg) scale(1.45);
-  z-index: -1;
-
-}

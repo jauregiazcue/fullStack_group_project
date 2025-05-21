@@ -31,7 +31,7 @@
   padding-bottom: 1em;
   background-color: var(--strongPrimary);
   border: 5px solid var(--strongPrimary);
-  border-radius: 5px;
+  border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -39,7 +39,7 @@
   & li {
     background-color: var(--strongSecondary);
     border: 5px solid var(--strongSecondary);
-    border-radius: 5%;
+    border-radius: 10px;
     text-align: center;
     margin-top: 1em;
     width: 40%;
