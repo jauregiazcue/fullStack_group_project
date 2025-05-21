@@ -12,6 +12,11 @@ const questionnaireSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
+      },
+
+      timer: {
+        type: Number,
+        required: false
       }
     }],
     required: true
