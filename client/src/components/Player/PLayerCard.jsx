@@ -1,20 +1,19 @@
 import Avatar from "../Avatar/Avatar";
 
-function PlayerCard({viewProps, side}) {
-    return (
-        {
-        side=="down" ? (
-            <section className="player-card__down">
-                <Avatar {viewProps.avatarImageUrl}>
-                {viewProps.forEach(prop) => {prop}} 
-            </section>
-        ) : (
-            <section className="player-card__right">
-                <Avatar {viewProps.avatarImageUrl}>
-                {viewProps.forEach(prop) => {prop}} 
-            </section>
-        }
-    )
+// Muestra el Avatar junto con los datos que se le pasen, debajo o a la derecha, segun side
+function PlayerCard({ key, socket, viewProps, side }) {
+  const { avatarImageUrl, ...otherProps } = viewProps;
+
+  return (
+    <section className={side === "down" ? "player-card__down" : "player-card__right"}>
+      <Avatar imageUrl={avatarImageUrl} />
+      {Object.entries(otherProps).map(([key, value]) => (
+        <div key={key}>{value}</div>
+      ))}
+    </section>
+  );
 }
+
+
 
 export default PlayerCard;

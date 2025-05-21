@@ -1,17 +1,37 @@
 import PlayerCard from "../Player/PlayerCard";
-//Componente que le da la funcionalidad de seleccion a AvatarList
-function WaitingList ({players}) {
-    const context=useContext(authContext);
-    const player=context.player;
-    const useEffect = () => {
-        //cambiar el avatar del jugador cuando es seleccionado en AvatarSelector
-    }[player]; //???: no se de que hacerlo depender para que al seleccionar el avatar en AvatarSelector, se actualice aqui
+import { useEffect } from "react";
 
-    return (
-        {players.forEach(player)=>
-            <PlayerCard {player.username, player.avatarImageUrl}>
-        }
-    )
+function WaitingList({ loggedUser, socket, players, avatars }) {
+  // const [players, setPlayers] = useState([]);
+  // const player = context.player;
+  
+  //cambiar el avatar del jugador cuando es seleccionado en AvatarSelector
+  useEffect(
+    (avatar) => {
+      loggedUser.avatarImageUrl = avatar.avatarImageUrl;
+    },
+    [loggedUser]
+  );
+
+  //extraer todos los players excepto el del usuario logeado
+  const filteredPlayers = players.filter((player) => player !== loggedUser);
+
+  //mostrar el avatar y su nick
+  return (
+    <section className="waiting-list">
+      {filteredPlayers.map((player) => (
+        <PlayerCard
+          key={player.idPlayer}
+          socket={socket}
+          viewProps={{
+            nick: player.nick,
+            avatarImageUrl: player.avatarImageUrl,
+          }}
+          side="down"
+        />
+      ))}
+    </section>
+  );
 }
 
 export default WaitingList;
