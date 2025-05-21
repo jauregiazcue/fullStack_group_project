@@ -109,5 +109,6 @@ function Register({ }) {
         </section>
     )
 }
+}
 
 export default Register;

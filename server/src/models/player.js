@@ -15,6 +15,12 @@ const playerSchema = new mongoose.Schema({
         type:Number,
         default:0
     },
+    avatar: {
+        type: String,
+        enum: ["avatar_img1", "avatar_img2", "favatar_img3"],
+        default: "avatar_img1",
+        required: true
+    },
     socketId: {
         type: String
     }

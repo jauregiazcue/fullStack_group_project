@@ -1,5 +1,5 @@
 import Player from "../../models/player.js";
-//import Game from "../../models/game.js";
+import Game from "../../models/game.js";
 import { PlayerAlredyExist, PlayerDoesNotExist } from "../../utils/errors/playerErrors.js";
 
 
