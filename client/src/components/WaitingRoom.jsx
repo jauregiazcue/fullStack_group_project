@@ -1,4 +1,3 @@
-// import "./WaitingRoom.css";
 import WaitingList from "./WaitingList";
 import AvatarSelector from "./AvatarSelector";
 import React, { useEffect, useState } from 'react';
@@ -45,7 +44,7 @@ const WaitingRoom = ({ players: initialPlayers, avatars, socket, loggedPlayer })
   }, []);
 
 
-  // 📡 Receptor para cambio de avatar de otros jugadores (habilitar cuando se use WebSocket)
+  // Receptor para cambio de avatar de otros jugadores (habilitar cuando se use WebSocket)
   // useEffect(() => {
   //   if (!socket) return;
   //   const handler = ({ playerId, newAvatar }) => {
@@ -86,29 +85,6 @@ const WaitingRoom = ({ players: initialPlayers, avatars, socket, loggedPlayer })
 
 export default WaitingRoom;
 
-// function WaitingRoom(loggedUser, socket, players, avatars) {
 
-//   return (
-//     <section className="waiting-room__container">
-//       <section className="waiting-list__container">
-//         <h1>Waiting Room</h1>
-//         <WaitingList
-//           loggedUser={loggedUser}
-//           socket={socket}
-//           players={players}
-//           avatars={avatars}
-//         />
-//       </section>
-//       <section className="avatar-selector__container">
-//         <h1>Select your avatar</h1>
-//         <AvatarSelector
-//           loggedUser={loggedUser}
-//           socket={socket}
-//           avatars={avatars}
-//         />
-//       </section>
-//     </section>
-//   );
-// }
 
 
