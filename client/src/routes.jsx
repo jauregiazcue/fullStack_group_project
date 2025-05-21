@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import AvatarList from "./startFromScratch/AvatarList.jsx";
+import WaitingRoomPage from "./components/WaitingRoomPage.jsx";
 
 // Carga datos dummy
 function getAllAvatars() {
   const avatars = [];
-  for (let i = 1; i <= 30; i++) {
+  for (let i = 0; i < 10; i++) {
     avatars.push({
       idAvatar: i,
-      avatarUrl: `/src/assets/avatar (${i}).svg`,
+      avatarUrl: `/src/assets/avatars/avatar (${i+1}).svg`,
     });
   }
   return avatars;
@@ -15,12 +15,13 @@ function getAllAvatars() {
 
 function getAllPlayers() {
   const players = [];
-  for (let i = 1; i <= 5; i++) {
+  const avatars=getAllAvatars();
+  for (let i = 0; i <= 0; i++) {
     players.push({
       idPlayer: i,
-      userId: i,
+      idUser: i,
       nick: `Player${i}`,
-      avatarUrl: `../assets/icons/avatar (${i}).svg`,
+      avatar: avatars[i],
     });
   }
   return players;
@@ -29,20 +30,23 @@ function getAllPlayers() {
 const avatars = getAllAvatars();
 const players = getAllPlayers();
 
-// function waitingRoomLoader() {
-//   return { avatars, players };
-// }
+const socket=null; // pendiente de implementar con sockets
 
-const socket="http://192.168.1.130:3002";
 
-const player=players[0];
-
+const loggedPlayer = players[0];
 
 const router = createBrowserRouter([
   {
-    path: "/waitingRoom",
-    element: <AvatarList avatars={avatars} />,
-  }
+    path: "/",
+    element: (
+      <WaitingRoomPage
+        players={players}
+        avatars={avatars}
+        socket={socket}
+        loggedPlayer={loggedPlayer}
+      />
+    ),
+  },
 ]);
 
 export default router;

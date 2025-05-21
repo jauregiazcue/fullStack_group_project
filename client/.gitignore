@@ -7,7 +7,11 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+src/assets/avatars/
+ignore/
 node_modules
+*.code-workspace
+
 dist
 dist-ssr
 *.local
