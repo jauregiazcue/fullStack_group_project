@@ -6,6 +6,12 @@ const playerSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    avatar: {
+        type: String,
+        enum: ["avatar_img1.png", "avatar_img2.png", "favatar_img3.png"],
+        default: "avatar_img1",
+        required: true
+    },
     gameId:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Game",
@@ -14,12 +20,6 @@ const playerSchema = new mongoose.Schema({
     gamePoints:{
         type:Number,
         default:0
-    },
-    avatar: {
-        type: String,
-        enum: ["avatar_img1", "avatar_img2", "favatar_img3"],
-        default: "avatar_img1",
-        required: true
     },
     socketId: {
         type: String

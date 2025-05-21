@@ -44,8 +44,8 @@ async function createGame(host, questionnaireId) {
   return game;
 }
 
-async function joinPlayer(nickname, gameId) { //meter _id
-  return await playerController.createPlayer(nickname, gameId);
+async function joinPlayer(nickname, avatar, gameId) { //meter _id desde front
+  return await playerController.createPlayer(nickname, avatar, gameId);
 }
 
 async function startGame(gameId) {

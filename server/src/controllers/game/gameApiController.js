@@ -44,8 +44,9 @@ async function createGame(req, res) {
 async function joinPlayer(req, res) { 
   try {
     const nickname = req.body.nickname;
+    const avatar = req.body.avatar;
     const id = req.params.gameId;
-    res.json(await gameController.joinPlayer(nickname, id));
+    res.json(await gameController.joinPlayer(nickname, avatar, id));
   } catch (error) {
     console.error(error);
     if (error.statusCode) {

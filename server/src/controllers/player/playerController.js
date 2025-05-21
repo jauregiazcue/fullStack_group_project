@@ -1,6 +1,6 @@
 import Player from "../../models/player.js";
 import Game from "../../models/game.js";
-import { PlayerAlredyExist, PlayerDoesNotExist } from "../../utils/errors/playerErrors.js";
+import { PlayerAlredyExist, PlayerDoesNotExist, AvatarIsAlredySelected } from "../../utils/errors/playerErrors.js";
 
 
 async function getPlayerById(playerId) {
@@ -11,7 +11,7 @@ async function getPlayerById(playerId) {
     return player;
 }
 
-async function createPlayer(nickname, gameId) {
+async function createPlayer(nickname, avatar, gameId) {
 
     const gameSession = await Game.findOne({ code: gameId }).populate("players");
 
@@ -19,7 +19,11 @@ async function createPlayer(nickname, gameId) {
         return new PlayerAlredyExist();
     }
 
-    const newPlayer = new Player({ nickname: nickname, gameId: gameId })
+    if (gameSession.players.some(player => player.avatar === avatar)) {
+        return new AvatarIsAlredySelected();
+    }
+
+    const newPlayer = new Player({ nickname: nickname, avatar: avatar, gameId: gameId });
     await newPlayer.save();
 
     gameSession.players.push(newPlayer);
@@ -35,6 +39,10 @@ async function editPlayer(gameId, playerId, data) {
 
     if (gameSession.players.some(player => player.nickname === nickname)) {
         return new PlayerAlredyExist();
+    }
+
+    if (gameSession.players.some(player => player.avatar === avatar)) {
+        return new AvatarIsAlredySelected();
     }
 
     const player = await Player.findByIdAndUpdate(playerId, data, { new: true });

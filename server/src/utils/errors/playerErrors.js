@@ -14,9 +14,15 @@ class PlayerAlredyExist extends Error {
         this.statusCode = 400;
     }
 }
+class AvatarIsAlredySelected extends Error {
+    constructor(){
+        super("Avatar is alredy selected");
+        this.statusCode = 400;
+    }
+}
 
 export {
     PlayerDoesNotExist,
-    PlayerAlredyExist
-
+    PlayerAlredyExist,
+    AvatarIsAlredySelected
 }
