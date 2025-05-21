@@ -1,7 +1,7 @@
 import { useState } from "react";
 import fetchData from "../../utils/fetchData";
 
-function Register({ }) {
+function Register({toggleSignup}) {
     const [error, setError] = useState(null);
     const [userData, setUserData] = useState({
         nickname: "",
@@ -88,10 +88,7 @@ function Register({ }) {
                 <input type="password" name="password" id="password" value={userData.password} onChange={handleUserPassword} />
                 <button>Regístrate</button>
             </form>
-            {/* <section className="auth__redirect">
-                <p>¿Ya tienes cuenta? </p>
-                <Link to="/login">Inicia sesión</Link>
-            </section> */}
+            <p onClick={toggleSignup}>¿Ya tienes una cuenta? </p>
         </section>
     )
 }

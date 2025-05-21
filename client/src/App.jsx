@@ -1,20 +1,31 @@
-import './App.css'
-import "@fontsource/fredoka";
-import "@fontsource/baloo-2";
-
+// App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider, AuthContext } from "./components/authContext/AuthContext";
+import { useContext } from "react";
 
 import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
+// asdasd2@asd.com
+
+function AppContent() {
+  const { token, nickname, email } = useContext(AuthContext);
+  return (
+    <>
+      <nav>
+        <h1>Erraton</h1>
+          {nickname ? <p>Logeado como {nickname} !</p> : <Login />}
+        <p>El token es: {token}</p>
+      </nav>
+    </>
+  );
+}
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-    </BrowserRouter>
+  <BrowserRouter>
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
+  </BrowserRouter>
   );
 }
 

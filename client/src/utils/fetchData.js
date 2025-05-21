@@ -3,9 +3,7 @@
 const BASE_URL = "http://localhost:3000";
 
 async function fetchData(route, method="GET", data=null) {
-    console.log("Vamos a ver");
     const url = BASE_URL + route;
-    console.log("This is the url", url);
     // const token = getToken();
     const options = { 
         method: method,
