@@ -1,6 +1,6 @@
 import { useState } from "react";
 import fetchData from "../../utils/fetchData";
-import "./Login.css"
+import "./Auth.css"
 
 // LOGIN 
 function Login() {
@@ -54,24 +54,32 @@ function Login() {
 
 
     return (
-        <section className="auth-wrapper">
 
-            <section className="auth__header">
-                <h1>Inicia sesión</h1>
-                <p className="error">{error}</p>
-            </section>
+        <section className="auth__container">
 
-            <form className="auth__form" onSubmit={handleSubmit}>
-                <label htmlFor="email">Correo electrónico</label>
-                <input type="email" name="email" id="email" value={userData.email} onChange={handleUserEmail} />
-                <label htmlFor="password">Contraseña</label>
-                <input type="password" name="password" id="password" value={userData.password} onChange={handleUserPassword} />
-                <button className="auth__button">Acceder</button>
-            </form>
-           {/*  <section className="auth__redirect">
-                <p>¿No tienes una cuenta? </p>
-                <Link to="/registro">Regístrate</Link>
-            </section> */}
+            <div className="auth__image">
+                <img src="src/assets/images/Login.png" alt="img" />
+            </div>
+
+            <div className="auth__wrapper">
+
+                <section className="auth__header">
+                    <h1>Inicia sesión</h1>
+                    <p className="error">{error}</p>
+                </section>
+
+                <form className="auth__form" onSubmit={handleSubmit}>
+                    <label htmlFor="email">Correo electrónico</label>
+                    <input className="auth__input" type="email" name="email" id="email" value={userData.email} onChange={handleUserEmail} />
+                    <label htmlFor="password">Contraseña</label>
+                    <input className="auth__input" type="password" name="password" id="password" value={userData.password} onChange={handleUserPassword} />
+                    <button type="submit" className="auth__button">Acceder</button>
+                </form>
+            {/*  <section className="auth__redirect">
+                    <p>¿No tienes una cuenta? </p>
+                    <Link to="/registro">Regístrate</Link>
+                </section> */}
+            </div>
         </section>
     )
 }
