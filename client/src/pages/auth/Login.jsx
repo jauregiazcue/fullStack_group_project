@@ -1,6 +1,6 @@
 import { useState } from "react";
 import fetchData from "../../utils/fetchData";
-import "./Login.css"
+import "./Auth.css"
 
 // LOGIN 
 function Login() {

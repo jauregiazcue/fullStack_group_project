@@ -92,7 +92,7 @@ box-sizing: border-box;
   margin-top: 3rem;
 
 }
-
+h
 .auth__button:hover { /* TO DO: REVISAR PORQUE NO FUNCIONA EL HOVER */
 background-color: var(--mario-orange); 
 }
