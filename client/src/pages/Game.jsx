@@ -3,6 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import { getQuestion } from "../utils/api/game";
 import { io } from "socket.io-client";
 
+import Timer from "../components/game/Timer";
+
+import "./Game.css";
+
 function Game() {
 
     const userData = useContext(AuthContext);
@@ -11,13 +15,12 @@ function Game() {
 
     const [question, setQuestion] = useState(null);
     const [socket, setSocket] = useState(null);
-    const [players, setPlayers] = useState({});
 
     useEffect(() => {
         
         const newSocket = io("http://localhost:3003");
 
-        newSocket.emit("join", { nickname, gameId: game._id });
+        newSocket.emit("join", { nickname: nickname, gameId: game._id });
 
         newSocket.on("gameSessionStarted", (newGame) => {
             handleGetQuestion();
@@ -32,7 +35,7 @@ function Game() {
             handleGetQuestion();
         })
 
-        newSocket.on("gameSessionFinished", (question) => {
+        newSocket.on("gameFinished", (question) => {
             alert("partida finalizada");
             // TODO mostra tus estadisticas.
         })
@@ -44,7 +47,7 @@ function Game() {
         }
 
         return () => {
-            newSocket.off("gameSessionStarted");
+            newSocket.off("gameStarted");
             newSocket.disconnect();
         }
 
@@ -56,6 +59,8 @@ function Game() {
     }
 
     return (
-        <div>Game</div>
+        <section className="game">
+
+        </section>
     );
 }
