@@ -1,16 +1,16 @@
 import {fetchData} from "./fetchData.js";
 
-async function getGameSessionById(gameId){
+async function getGameById(gameId){
     const game = await fetchData(`/game/${gameId}`);
     return game;
 }
 
-async function startGameSession(gameId){
+async function startGame(gameId){
     const game = await fetchData(`/game/start/${gameId}`,"POST");
     return game;
 }
 
-async function joinGameSession(gameId,nickname){
+async function joinGame(gameId,nickname){
     const game = await fetchData(`/game/join/${gameId}`,"POST",{nickname});
     return game;
 }
@@ -24,9 +24,9 @@ async function nextQuestion(id){
 }
 
 export {
-    getGameSessionById,
-    startGameSession,
-    joinGameSession,
+    getGameById,
+    startGame,
+    joinGame,
     getQuestion,
     nextQuestion
 }

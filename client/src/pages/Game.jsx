@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { getQuestion } from "../utils/api/game";
 import { io } from "socket.io-client";
+import { getGameById } from "../utils/api/game";
 
 import Timer from "../components/game/Timer";
 
@@ -19,8 +20,8 @@ function Game() {
     useEffect(() => {
         
         const newSocket = io("http://localhost:3003");
-
-        newSocket.emit("join", { nickname: nickname, gameId: game._id });
+        userData? setPlayer(userData) : setPlayer({nickname:"anonimous"}) // TODO sacar player
+        newSocket.emit("join", { nickname: player.nickname, gameId: game._id });
 
         newSocket.on("gameSessionStarted", (newGame) => {
             handleGetQuestion();
