@@ -1,19 +1,24 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import fetchData from "../../utils/fetchData";
 const MakeGameForm = () => {
-  const mockQuestionaires = {
-    questionaires: [
-      { questionaireName: "test1", id: "blablabliblu" },
-      { questionaireName: "test2", id: "qweqweqwe" },
-      { questionaireName: "test3", id: "asdasd" }
-    ]
-  };
+  const [questionaires, setQuestionaires] = useState([]);
+  useEffect(() => {
+    const fetchQuestionaires = async () => {
+      const response = await fetchData("/questionnaire");
+      const data = await response;
+      setQuestionaires(data);
+    if (data.length > 0) {
+      setFormData(prev => ({ ...prev, questionaireId: data[0].id }));
+    }
+    };
+    fetchQuestionaires();
+  }, [])
 
   const [formData, setFormData] = useState({
     questions: 5,
     players: 2,
     timePerQuestion: 30,
-    questionaireId: mockQuestionaires.questionaires[0].id
+    questionaireId: null
   });
 
   const handleChange = (e) => {
@@ -75,9 +80,9 @@ const MakeGameForm = () => {
           value={formData.questionaireId}
           onChange={handleChange}
         >
-          {mockQuestionaires.questionaires.map((q) => (
+          {questionaires.map((q) => (
             <option key={q.id} value={q.id}>
-              {q.questionaireName}
+              {q.title}
             </option>
           ))}
         </select>

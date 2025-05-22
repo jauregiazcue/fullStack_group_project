@@ -11,13 +11,13 @@ const JoinGameButton = ({nickname}) => {
     }
     //Get info into sessionStorage
     return(
-        <p>
+        <div>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="gameIdField">Game Id: </label><input type="text" name="gameIdField" id="gameIdField" />
                 <label htmlFor="userNickname">Nickname: </label><input type="text" name="userNickname" id="userNickname" value={nickname} />
                 <button type="submit">Join Game!</button>
             </form>
-        </p>
+        </div>
     )
 }
 
