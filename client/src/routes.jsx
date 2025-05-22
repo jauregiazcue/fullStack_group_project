@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import WaitingRoomPage from "./components/WaitingRoomPage.jsx";
+import WaitingRoomPage from "./components/WaitingRoom/WaitingRoomPage.jsx";
 
 // Carga datos dummy
 function getAllAvatars() {
