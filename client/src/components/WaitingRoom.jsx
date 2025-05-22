@@ -15,9 +15,9 @@ const WaitingRoom = ({ players: initialPlayers, avatars, socket, loggedPlayer })
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (players.length < 6) {
+      if (players.length < 10){
         const fakePlayer = {
-          idPlayer: `bot-${Date.now()}`,
+          idPlayer: `${Date.now()}`,
           nick: `Player${players.length + 1}`,
           avatar: avatars[Math.floor(Math.random() * avatars.length)],
         };

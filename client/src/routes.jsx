@@ -5,9 +5,11 @@ import WaitingRoomPage from "./components/WaitingRoomPage.jsx";
 function getAllAvatars() {
   const avatars = [];
   for (let i = 0; i < 10; i++) {
+    const index = String(i + 1).padStart(2, '0');
+    const avatarUrl = `/src/assets/avatars/avatar (${index}).svg`;
     avatars.push({
       idAvatar: i,
-      avatarUrl: `/src/assets/avatars/avatar (${i+1}).svg`,
+      avatarUrl: avatarUrl,
     });
   }
   return avatars;
