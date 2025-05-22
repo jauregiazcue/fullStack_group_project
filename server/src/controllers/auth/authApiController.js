@@ -1,26 +1,22 @@
 import { createToken } from "../../utils/token.js";
 import authController from "./authController.js";
+import User from "../../models/user.js";
 
 async function register(req, res) {
     try {
-
         const result = await authController.register(req.body);
         res.json(result);
-
     } catch (error) {
-
         console.error(error);
         if (error.statusCode) {
             res.status(error.statusCode).json({ error: error.message });
         } else {
             res.status(500).json({ error: "Internal server error" });
         }
-
     }
 }
 async function login(req, res) {
     try {
-        console.log(req)
         const { email, password } = req.body;
         const user = await authController.login(email, password);
 
@@ -29,7 +25,8 @@ async function login(req, res) {
         };
 
         const token = createToken(payload);
-        res.json({ token });
+        const userData = await User.findOne({email}).select("-password");
+        res.json({ token, userData });
 
     } catch (error) {
 
