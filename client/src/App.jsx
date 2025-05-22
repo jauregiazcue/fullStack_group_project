@@ -1,7 +1,10 @@
-// App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider, AuthContext } from "./components/authContext/AuthContext";
 import { useContext } from "react";
+import './App.css'
+import Register from './pages/auth/Register'
+/* import "@fontsource/fredoka";
+import "@fontsource/baloo-2"; */
 
 import Login from "./pages/auth/Login";
 // asdasd2@asd.com

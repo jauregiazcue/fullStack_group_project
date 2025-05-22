@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
-import { Link } from 'react-router-dom';
 import fetchData from "../../utils/fetchData";
 import { AuthContext } from "../../components/authContext/AuthContext";
 import "./Login.css"
 import Register from "./Register";
+import "./Auth.css"
 // LOGIN 
 function Login() {
     const { setToken, setNickname, setEmail } = useContext(AuthContext);
@@ -44,7 +44,7 @@ function Login() {
             setNickname(loginResponse.userData.nickname);
             setEmail(loginResponse.userData.email);
             setUserData({ email: "", password: "" }); 
-            /* alert("¡Registro exitoso!"); */
+            alert("Login exitoso!");
             }
             setError(null);
         } catch (error) {
