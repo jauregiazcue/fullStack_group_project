@@ -9,6 +9,7 @@ const JoinGameButton = ({nickname}) => {
         const response = await fetchData(`/joinPlayer/${gameId}`, "POST");
         console.log(response);
     }
+    //Get info into sessionStorage
     return(
         <p>
             <form onSubmit={handleSubmit}>
