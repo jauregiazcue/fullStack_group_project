@@ -1,0 +1,18 @@
+:root {
+  --text: #F4EAD5;
+  --background: #27283d;
+  --strongPrimary: #1a1b2d;
+  --weakPrimary: #eabe71;
+  --strongSecondary: #c05622;
+  --weakSecondary: #eabe71;
+  --hover: lightgray;
+
+  --circleSize: 80px;
+}
+
+html {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+
