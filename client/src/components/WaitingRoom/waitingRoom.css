@@ -1,0 +1,38 @@
+.player-card {
+    flex-direction: column;
+    max-width: 80px;
+    margin: 0 auto;
+}
+
+.player-card p {
+  font-family: "Arial";
+}
+
+.avatar-option {
+  display: flex;
+  align-items: center;
+  max-width: 50px;
+  margin:20px auto;
+}
+
+.waiting-room {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.waiting-list {
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content: center;
+}
+
+.avatar-list {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  flex-direction: column;
+  align-items: center;
+}
+

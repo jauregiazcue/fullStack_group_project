@@ -1,0 +1,53 @@
+.history__container {
+  height: fit-content;
+}
+.history__container--id {
+  display: flex;
+  margin: auto auto;
+  width: 50%;
+  justify-content: space-evenly;
+  height: fit-content;
+  & p {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+  }
+}
+
+.history__graph {
+  background-color: var(--strongPrimary);
+
+}
+.history__button--stats {
+  margin-top: 0;
+}
+
+.history__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin: auto auto;
+  width: 80%;
+  height:fit-content;
+  padding-bottom: 1em;
+  background-color: var(--strongPrimary);
+  border: 5px solid var(--strongPrimary);
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  
+  & li {
+    background-color: var(--strongSecondary);
+    border: 5px solid var(--strongSecondary);
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 1em;
+    width: 40%;
+    height: fit-content;
+  }
+}
+
+.history__winner {
+  font-size: xx-large;
+  margin-bottom: 0;
+}
