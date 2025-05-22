@@ -15,8 +15,8 @@ const APP_PORT = process.env.APP_PORT;
 const CLIENT_URL = process.env.CLIENT_URL;
 const app = express();
 const corsOptions = {
-    // origin: CLIENT_URL,
-    // credentials: true // Permitir envío de cookies
+    origin: CLIENT_URL,
+    credentials: true // Permitir envío de cookies
 }
 
 app.use(cors(corsOptions));
@@ -43,8 +43,6 @@ io.on("connection", (socket)=> {
 })
 
 app.use("/",router);
-
-
 
 httpServer.listen(3000,()=>{
     console.log(`Backend conectado al puerto ${APP_PORT}`);
