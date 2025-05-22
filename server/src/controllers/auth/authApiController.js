@@ -4,19 +4,15 @@ import User from "../../models/user.js";
 
 async function register(req, res) {
     try {
-
         const result = await authController.register(req.body);
         res.json(result);
-
     } catch (error) {
-
         console.error(error);
         if (error.statusCode) {
             res.status(error.statusCode).json({ error: error.message });
         } else {
             res.status(500).json({ error: "Internal server error" });
         }
-
     }
 }
 async function login(req, res) {
