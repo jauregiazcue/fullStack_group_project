@@ -1,8 +1,6 @@
-// import { getToken } from "../utils/localStorage";
-
 const BASE_URL = "http://localhost:3000";
 
-async function fetchData(route, method="GET", data=null) {
+async function fetchData(route, method="GET", data=null, token=null) {
     const url = BASE_URL + route;
     // const token = getToken();
     const options = { 
@@ -10,9 +8,9 @@ async function fetchData(route, method="GET", data=null) {
         headers: {} 
     };
     
-    // if (token) {
-    //     options.headers["Authorization"] = `Bearer ${token}`;
-    // }
+    if (token) {
+        options.headers["Authorization"] = `Bearer ${token}`;
+    }
     
     if (data) {
         options.headers["Content-Type"] = "application/json"; 

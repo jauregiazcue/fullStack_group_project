@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import fetchData from "../../utils/fetchData";
+import { AuthContext } from "../../components/authContext/AuthContext";
+import { useContext } from "react";
+
 const MakeGameForm = () => {
+  const { token, nickname, email } = useContext(AuthContext);
   const [questionaires, setQuestionaires] = useState([]);
   useEffect(() => {
     const fetchQuestionaires = async () => {
@@ -32,6 +36,12 @@ const MakeGameForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    const makeGameQuery = {
+      ...formData,
+      host:nickname
+    }
+    const response = fetchData(`/game/${formData.questionaireId}`, "POST", makeGameQuery, token);
+    console.log(response);
   };
 
   return (
@@ -81,7 +91,7 @@ const MakeGameForm = () => {
           onChange={handleChange}
         >
           {questionaires.map((q) => (
-            <option key={q.id} value={q.id}>
+            <option key={q._id} value={q._id}>
               {q.title}
             </option>
           ))}
