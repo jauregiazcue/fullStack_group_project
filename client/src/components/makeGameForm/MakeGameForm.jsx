@@ -32,15 +32,15 @@ const MakeGameForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
     const makeGameQuery = {
       ...formData,
       host:_id
     }
-    const response = fetchData(`/game/${formData.questionaireId}`, "POST", makeGameQuery, token);
-    console.log("response is: ");
+    const response = await fetchData(`/game/${formData.questionaireId}`, "POST", makeGameQuery, token);
+    console.log("response isss: ");
     console.log(response);
   };
 
