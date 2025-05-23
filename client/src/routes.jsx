@@ -1,6 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import WaitingRoomPage from "./components/WaitingRoom/WaitingRoomPage.jsx";
 
+
+
+
 // Carga datos dummy
 function getAllAvatars() {
   const avatars = [];
@@ -41,12 +44,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <WaitingRoomPage
+    <WaitingRoomPage
         players={players}
         avatars={avatars}
         socket={socket}
         loggedPlayer={loggedPlayer}
-      />
+      />    
     ),
   },
 ]);

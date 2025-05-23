@@ -97,7 +97,7 @@ function Register({toggleSignup}) {
                     <label htmlFor="password">Contraseña</label>
                     <input type="password" name="password" id="password" value={userData.password} onChange={handleUserPassword} />
 
-                    <button>Regístrate</button>
+                    <button className="auth__button">Regístrate</button>
                 </form>
 
                 <p onClick={toggleSignup}>¿Ya tienes una cuenta? </p>

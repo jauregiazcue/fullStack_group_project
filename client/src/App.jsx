@@ -11,7 +11,7 @@ function AppContent() {
   return (
     <>
       <nav>
-        <h1>Erraton</h1>
+        <h1>Erratón</h1>
           {nickname ? <p>Logeado como {nickname} !</p> : <Login />}
         <p>El token es: {token}</p>
       </nav>
