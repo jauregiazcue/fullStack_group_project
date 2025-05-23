@@ -1,32 +1,47 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import fetchData from "../../utils/fetchData";
+import { AuthContext } from "../../components/authContext/AuthContext";
 
 const MakeGameForm = () => {
-  const mockQuestionaires = {
-    questionaires: [
-      { questionaireName: "test1", id: "blablabliblu" },
-      { questionaireName: "test2", id: "qweqweqwe" },
-      { questionaireName: "test3", id: "asdasd" }
-    ]
-  };
+  const { token, nickname, email, _id } = useContext(AuthContext);
+  const [questionaires, setQuestionaires] = useState([]);
+  useEffect(() => {
+    const fetchQuestionaires = async () => {
+      const response = await fetchData("/questionnaire");
+      const data = await response;
+      setQuestionaires(data);
+    if (data.length > 0) {
+      setFormData(prev => ({ ...prev, questionaireId: data[0]._id }));
+    }
+    };
+    fetchQuestionaires();
+  }, [])
 
   const [formData, setFormData] = useState({
     questions: 5,
     players: 2,
     timePerQuestion: 30,
-    questionaireId: mockQuestionaires.questionaires[0].id
+    questionaireId: null
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: name === "questionaireId" ? value : parseInt(value)
+      [name]: name === "questionaireId" ? value : value
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
+    const makeGameQuery = {
+      ...formData,
+      host:_id
+    }
+    const response = await fetchData(`/game/${formData.questionaireId}`, "POST", makeGameQuery, token);
+    console.log("response isss: ");
+    console.log(response);
   };
 
   return (
@@ -75,9 +90,9 @@ const MakeGameForm = () => {
           value={formData.questionaireId}
           onChange={handleChange}
         >
-          {mockQuestionaires.questionaires.map((q) => (
-            <option key={q.id} value={q.id}>
-              {q.questionaireName}
+          {questionaires.map((q) => (
+            <option key={q._id} value={q._id}>
+              {q.title}
             </option>
           ))}
         </select>

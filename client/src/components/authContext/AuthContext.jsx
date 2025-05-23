@@ -12,7 +12,9 @@ export function AuthProvider({ children }) {
   const [email, setEmail] = useState(() => {
     return localStorage.getItem("email") || null;
   })
-
+  const [_id, set_id] = useState(() => {
+    return localStorage.getItem("_id") || null;
+  })
   useEffect(() => {
     if (token) {
       localStorage.setItem("authToken", token);
@@ -31,10 +33,15 @@ export function AuthProvider({ children }) {
     } else {
       localStorage.removeItem("email");
     }
-  }, [token, nickname, email]);
+    if (_id) {
+      localStorage.setItem("_id", _id);
+    } else {
+      localStorage.removeItem("_id");
+    }
+  }, [token, nickname, email, _id]);
 
   return (
-    <AuthContext.Provider value={{ token, setToken, nickname, setNickname, email, setEmail }}>
+    <AuthContext.Provider value={{ token, setToken, nickname, setNickname, email, setEmail, _id, set_id }}>
       {children}
     </AuthContext.Provider>
   );
