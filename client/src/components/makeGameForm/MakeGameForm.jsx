@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import fetchData from "../../utils/fetchData";
 import { AuthContext } from "../../components/authContext/AuthContext";
-import { useContext } from "react";
 
 const MakeGameForm = () => {
-  const { token, nickname, email } = useContext(AuthContext);
+  const { token, nickname, email, _id } = useContext(AuthContext);
   const [questionaires, setQuestionaires] = useState([]);
   useEffect(() => {
     const fetchQuestionaires = async () => {
@@ -12,7 +11,7 @@ const MakeGameForm = () => {
       const data = await response;
       setQuestionaires(data);
     if (data.length > 0) {
-      setFormData(prev => ({ ...prev, questionaireId: data[0].id }));
+      setFormData(prev => ({ ...prev, questionaireId: data[0]._id }));
     }
     };
     fetchQuestionaires();
@@ -29,7 +28,7 @@ const MakeGameForm = () => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: name === "questionaireId" ? value : parseInt(value)
+      [name]: name === "questionaireId" ? value : value
     }));
   };
 
@@ -38,9 +37,10 @@ const MakeGameForm = () => {
     console.log(formData);
     const makeGameQuery = {
       ...formData,
-      host:nickname
+      host:_id
     }
     const response = fetchData(`/game/${formData.questionaireId}`, "POST", makeGameQuery, token);
+    console.log("response is: ");
     console.log(response);
   };
 
