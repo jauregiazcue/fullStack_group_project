@@ -1,33 +1,48 @@
 import WaitingList from "./WaitingList";
 import AvatarSelector from "./AvatarSelector";
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+// import Game from "../pages/Game";
 
-const WaitingRoom = ({ players: initialPlayers, avatars, socket, loggedPlayer }) => {
-  const [players, setPlayers] = useState(initialPlayers);
+function getAllAvatars() {
+  const avatars = [];
+  for (let i = 0; i < 10; i++) {
+    const index = String(i + 1).padStart(2, "0");
+    const avatarUrl = `/src/assets/avatars/avatar (${index}).svg`;
+    avatars.push({
+      idAvatar: i,
+      avatarUrl: avatarUrl,
+    });
+  }
+  console.log("avatars", avatars);
+  return avatars;
+}
+
+const WaitingRoom = ({ players:initialPlayers, socket, loggedPlayer }) => {
+  const [players, setPlayers] = useState(initialPlayers); // lista de jugadores
   const [remainingTime, setRemainingTime] = useState(30); // en segundos
+  const [startGame, setStartGame] = useState(false); // marca el inicio del juego cuando countdown = 0
+  const [avatars, setAvatars] = useState([]); 
+
+  //cargar los avatares cuando se monta el componente
+  useEffect(() => {
+    setAvatars(getAllAvatars());
+  }, []);
 
   // Codigo de reemplazo de la simulacion de entrada de jugadores cuando sockets se implementen
   // useEffect(() => {
-  //   socket.on("player-joined", (newPlayer) => {
+  //   const handler = (newPlayer) => {
   //     setPlayers((prev) => [...prev, newPlayer]);
-  //   });
+  //   };
+  //   socket.on("player-joined", handler);
+  //   return () => socket.off("player-joined", handler);
   // }, [socket]);
-
-  // ó este otro codigo alternativo:
-
-  // socket.on("playerJoined",
-  //   function (player) {
-  //     setPlayers(function (prevPlayers) {
-  //       return prevPlayers.concat(player);
-  //     });
-  //   }
-  // );
 
   // Simulación de jugadores que se unen (reemplazar con socket.on en el futuro)
   // - Al montar el componente, se inicia un setInterval que corre cada 5 segundos.
   // - Si hay menos de 10 jugadores, se crea un jugador falso con un nombre y un avatar aleatorio.
   // - Ese nuevo jugador se añade a la lista de jugadores (setPlayers).
   // - Cuando el componente se desmonta o cambian players o avatars, el intervalo se limpia para evitar que siga funcionando en segundo plano.
+
   useEffect(
     function () {
       // Creamos un intervalo que se ejecuta cada 5 segundos (5000 milisegundos)
@@ -59,22 +74,18 @@ const WaitingRoom = ({ players: initialPlayers, avatars, socket, loggedPlayer })
     [players, avatars]
   );
 
-
   // Temporizador de cuenta atrás para entrar al juego
   useEffect(function () {
-
     // Inicia un temporizador que se ejecuta cada 1000 milisegundos (1 segundo)
     let timer = setInterval(function () {
-
       // Usamos la función de actualización del estado para obtener el tiempo actual
       setRemainingTime(function (prev) {
-        
         // Si el tiempo restante es menor o igual a 1 segundo...
         if (prev <= 1) {
           // ...detenemos el temporizador
           clearInterval(timer);
-          // Aquí iría el cambio de pantalla al juego, por ejemplo:
-          // navigate('/game');
+          // Iniciar el juego
+          setStartGame(true);
         }
 
         // Devolvemos el nuevo tiempo restante (uno menos que el anterior)
@@ -88,15 +99,17 @@ const WaitingRoom = ({ players: initialPlayers, avatars, socket, loggedPlayer })
     };
   }, []);
 
-
   // Receptor para cambio de avatar de otros jugadores (habilitar cuando se use WebSocket)
   // useEffect(() => {
   //   if (!socket) return;
-  //   const handler = ({ playerId, newAvatar }) => {
+  //   const handler = ({ idPlayer, newAvatar }) => {
   //     setPlayers((prev) =>
-  //       prev.map((p) => (p.id === playerId ? { ...p, avatar: newAvatar } : p))
+  //       prev.map((p) =>
+  //         p.idPlayer === idPlayer ? { ...p, avatar: newAvatar } : p
+  //       )
   //     );
   //   };
+  // });
 
   // Cambiar el avatar del jugador que ha iniciado sesión
   // - handleAvatarChange recibe el nuevo avatar como argumento.
@@ -108,20 +121,16 @@ const WaitingRoom = ({ players: initialPlayers, avatars, socket, loggedPlayer })
   function handleAvatarChange(newAvatar) {
     // Actualizamos la lista de jugadores
     setPlayers(function (prevPlayers) {
-
       // Creamos una nueva lista con los jugadores actualizados
       let updatedPlayers = prevPlayers.map(function (player) {
-
         // Si el jugador actual es el jugador logueado, cambiamos su avatar
         if (player.idPlayer === loggedPlayer.idPlayer) {
-
           // Creamos un nuevo objeto con el avatar cambiado
           return Object.assign({}, player, { avatar: newAvatar });
         } else {
           // Si no es el jugador logueado, lo dejamos igual
           return player;
         }
-
       });
 
       // Devolvemos la nueva lista de jugadores
@@ -129,24 +138,30 @@ const WaitingRoom = ({ players: initialPlayers, avatars, socket, loggedPlayer })
     });
 
     // En el futuro: enviar el cambio al servidor con WebSocket
-    // socket.emit('avatar-change', { playerId: loggedPlayer.id, newAvatar });
+    socket.emit('avatar-change', { idPlayer: loggedPlayer.idPlayer, newAvatar });
   }
 
-  
   return (
-    <div className="waiting-room">
-      <h2>Waiting Room</h2>
-      <WaitingList players={players} />
-      <AvatarSelector
-        avatars={avatars}
-        currentAvatar={loggedPlayer.avatar}
-        onAvatarSelect={handleAvatarChange}
-      />
-      <p>
-        La partida comenzará en: {Math.floor(remainingTime / 60)}:
-        {(remainingTime % 60).toString().padStart(2, "0")}
-      </p>
-    </div>
+    <>
+      {!startGame ? (
+        <div className="waiting-room">
+          <h2>Waiting Room</h2>
+          <WaitingList players={players} />
+          <AvatarSelector
+            avatars={avatars}
+            currentAvatar={loggedPlayer.avatar}
+            onAvatarSelect={handleAvatarChange}
+          />
+          <p>
+            La partida comenzará en: {Math.floor(remainingTime / 60)}:
+            {(remainingTime % 60).toString().padStart(2, "0")}
+          </p>
+        </div>
+      ) : (
+          <p>Inicio del juego</p>
+        // <Game players={players} />
+      )}
+    </>
   );
 };
 
