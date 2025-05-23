@@ -8,7 +8,7 @@ function Register({ }) {
         nickname: "",
         email: "",
         password: ""
-    }) //para modificar estos estados debo desestructurar y modificarlos de a uno, si no un useState por campo
+    })
 
     const handleUserPassword = (e) => {
         const newPassword = e.target.value;
@@ -85,26 +85,33 @@ function Register({ }) {
     }
     
     return (
-        <section className="auth_wrapper">
 
-            <section className="auth__header">
-                <h1>Registro</h1>
-                <p className="error">{error}</p>
+        <section className="auth__container">
+
+            <div className="auth__image">
+                <img src="src/assets/images/Register.png" alt="img" />
+            </div>
+        
+            <section className="auth_wrapper">
+
+                <section className="auth__header">
+                    <h1>Registro</h1>
+                    <p className="error">{error}</p>
+                </section>
+
+                <form className="auth__form" onSubmit={handleSubmit}>
+                    <label htmlFor="nickname">Nombre de usuario</label>
+                    <input type="text" name="nickname" id="nickname" value={userData.nickname} onChange={handleNickname} />
+                    <label htmlFor="email">Correo electrónico</label>
+                    <input type="email" name="email" id="email" value={userData.email} onChange={handleUserEmail} />
+                    <label htmlFor="password">Contraseña</label>
+                    <input type="password" name="password" id="password" value={userData.password} onChange={handleUserPassword} />
+                    <button>Regístrate</button>
+                </form>
+                <section className="auth__redirect">
+                    <p onClick={toggleSignup}>¿No tienes una cuenta? </p>
+                </section>
             </section>
-
-            <form className="auth__form" onSubmit={handleSubmit}>
-                <label htmlFor="nickname">Nombre de usuario</label>
-                <input type="text" name="nickname" id="nickname" value={userData.nickname} onChange={handleNickname} />
-                <label htmlFor="email">Correo electrónico</label>
-                <input type="email" name="email" id="email" value={userData.email} onChange={handleUserEmail} />
-                <label htmlFor="password">Contraseña</label>
-                <input type="password" name="password" id="password" value={userData.password} onChange={handleUserPassword} />
-                <button>Regístrate</button>
-            </form>
-            {/* <section className="auth__redirect">
-                <p>¿Ya tienes cuenta? </p>
-                <Link to="/login">Inicia sesión</Link>
-            </section> */}
         </section>
     )
 }
