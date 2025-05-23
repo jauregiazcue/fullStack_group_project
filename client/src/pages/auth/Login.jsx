@@ -1,8 +1,7 @@
 import { useContext, useState } from "react";
-import { Link } from 'react-router-dom';
 import fetchData from "../../utils/fetchData";
 import { AuthContext } from "../../components/authContext/AuthContext";
-import "./Login.css"
+import "./Auth.css" 
 import Register from "./Register";
 // LOGIN 
 function Login() {
@@ -54,21 +53,33 @@ function Login() {
 
     return (
         !displaySignup ? <>
-            <section className="auth-wrapper">
-                <section className="auth__header">
-                    <h1>Inicia sesión</h1>
-                    <p className="error">{error}</p>
+            <section className="auth__container">
+
+                <div className="auth__image">
+                    <img src="src/assets/images/Login.png" alt="img" />
+                </div>
+
+                <section className="auth-wrapper">
+
+                    <section className="auth__header">
+                        <h1>Inicia sesión</h1>
+                        <p className="error">{error}</p>
+                    </section>
+
+                    <form className="auth__form" onSubmit={handleSubmit}>
+                        <label htmlFor="email">Correo electrónico</label>
+                        <input type="email" name="email" id="email" value={userData.email} onChange={handleUserEmail} />
+                        <label htmlFor="password">Contraseña</label>
+                        <input type="password" name="password" id="password" value={userData.password} onChange={handleUserPassword} />
+                        <button className="auth__button">Acceder</button>
+                    </form>
+
+                    <section className="auth__redirect">
+                        <p onClick={toggleSignup}>¿No tienes una cuenta? </p>
+                    </section>
+
                 </section>
-                <form className="auth__form" onSubmit={handleSubmit}>
-                    <label htmlFor="email">Correo electrónico</label>
-                    <input type="email" name="email" id="email" value={userData.email} onChange={handleUserEmail} />
-                    <label htmlFor="password">Contraseña</label>
-                    <input type="password" name="password" id="password" value={userData.password} onChange={handleUserPassword} />
-                    <button className="auth__button">Acceder</button>
-                </form>
-                <section className="auth__redirect">
-                    <p onClick={toggleSignup}>¿No tienes una cuenta? </p>
-                </section>
+                
             </section>
         </> : <Register toggleSignup={toggleSignup}/>
     )
