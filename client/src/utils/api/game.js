@@ -1,4 +1,4 @@
-import {fetchData} from "./fetchData.js";
+import fetchData from "../fetchData.js";
 
 async function getGameById(gameId){
     const game = await fetchData(`/game/${gameId}`);

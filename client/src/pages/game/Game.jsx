@@ -1,27 +1,33 @@
 import { useLoaderData } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { getQuestion } from "../utils/api/game";
-import { io } from "socket.io-client";
-import { getGameById } from "../utils/api/game";
 
-import Timer from "../components/game/Timer";
+import { AuthContext } from "../../components/authContext/AuthContext.jsx";
+import { getQuestion } from "../../utils/api/game.js";
+import { io } from "socket.io-client";
+
+import { getGameById } from "../../utils/api/game.js";
+import Timer from "../../components/game/Timer.jsx";
 
 import "./Game.css";
 
 function Game() {
-
     const userData = useContext(AuthContext);
-
-    const game = useLoaderData();
+    
+    const game = useLoaderData(); // change useLoaderData to useEffect
 
     const [question, setQuestion] = useState(null);
     const [socket, setSocket] = useState(null);
+    const [player, setPlayer] = useState(null);
 
     useEffect(() => {
-        
+        if(userData) {
+            getGameById(userData._id);
+        }
         const newSocket = io("http://localhost:3003");
-        userData? setPlayer(userData) : setPlayer({nickname:"anonimous"}) // TODO sacar player
-        newSocket.emit("join", { nickname: player.nickname, gameId: game._id });
+        let nickname = null;
+        userData ? nickname = (userData.nickname) : nickname = ({ nickname: "anonimous" }) // TODO sacar player
+        setPlayer(nickname);
+        newSocket.emit("join", { nickname: nickname, gameId: game._id });
 
         newSocket.on("gameSessionStarted", (newGame) => {
             handleGetQuestion();
@@ -43,7 +49,7 @@ function Game() {
 
         setSocket(newSocket);
 
-        if (gameSession.state === "started") {
+        if (game.state === "started") {
             handleGetQuestion();
         }
 
@@ -61,7 +67,9 @@ function Game() {
 
     return (
         <section className="game">
-
+            <h1>Game</h1>
         </section>
     );
 }
+
+export default Game;
