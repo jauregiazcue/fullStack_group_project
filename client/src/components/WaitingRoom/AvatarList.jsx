@@ -1,4 +1,4 @@
-
+// Componente de lista de avatares
 const AvatarList = ({ avatars, currentAvatar, onSelect }) => {
   return (
     <div className="avatar-list">

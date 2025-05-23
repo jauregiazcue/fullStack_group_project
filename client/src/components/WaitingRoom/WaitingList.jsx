@@ -1,6 +1,7 @@
 
-// Muestra una cuadricula con los jugadores que se han añadido al lobby
+// Muestra una cuadricula con los jugadores que se van añadiendo al lobby
 const WaitingList = ({ players }) => {
+  
   return (
     <div className="waiting-list">
       {players.map((player) => (

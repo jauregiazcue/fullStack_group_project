@@ -2,27 +2,21 @@ import WaitingRoom from "./WaitingRoom.jsx";
 import "./waitingRoom.css";
 
 
-// Carga datos dummy
-function getAllPlayers() {
-  const players = [];
-  for (let i = 0; i <= 0; i++) {
-    players.push({
-      idPlayer: i,
-      idUser: i,
-      nick: `Player${i}`,
-      avatar: `/src/assets/avatars/avatar (${i}).svg`
-    });
+const socket = null; // Pendiente de implementación con sockets
+
+// BORRAR
+// crear de forma artificial el player logueado hasta usar sockets
+const loggedPlayer = {
+  idPlayer: 0,
+  idUser: 0,
+  nick: `Player0`,
+  avatar: {
+    idAvatar: 0,
+    used: true,
+    avatarUrl: "/src/assets/avatars/avatar (01).svg"
   }
-  return players;
-}
-
-const players = getAllPlayers();
-
-const socket=null; // pendiente de implementar con sockets
-
-
-const loggedPlayer = players[0];
-
+};
+const players=[loggedPlayer];
 
 function WaitingRoomPage() {
   return (
