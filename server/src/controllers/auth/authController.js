@@ -11,14 +11,34 @@ import {
 
 async function register(userData) {
 
+
     if (!userData.nickname) {
         throw new UserNicknameNotProvided();
     }
+
     if (!userData.email) {
         throw new UserEmailNotProvided();
     }
+
+    const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    console.log("THis is data");
+    console.log(data);
+    if (!pwdRegex.test(data.user_pwd)) {
+        const error = new Error('The password must be at least 8 characters long, with letters and numbers');
+        error.statusCode = 400;
+        throw error;
+    }
+
     if (!userData.password) {
         throw new UserPasswordNotProvided();
+    }
+
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    if (!emailRegex.test(data.user_email)) {
+        const error = new Error('The email is not valid');
+        error.statusCode = 400;
+        throw error;
     }
 
     const oldUser = await User.findOne({email: userData.email});

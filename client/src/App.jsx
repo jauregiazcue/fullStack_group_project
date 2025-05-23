@@ -6,7 +6,7 @@ import JoinGameButton from "./components/joinGameButton/JoinGameButton";
 import MakeGameForm from "./components/makeGameForm/MakeGameForm";
 import Login from "./pages/auth/Login";
 // asdasd2@asd.com
-
+// qweqwe2@qwe.com
 function AppContent() {
   const { token, nickname, email } = useContext(AuthContext);
   return (
