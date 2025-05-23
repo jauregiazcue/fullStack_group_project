@@ -42,6 +42,7 @@ function Register({toggleSignup}) {
                 setError("El formato de email no es válido");
                 return;
             }
+
             const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/;
             if (!passwordRegex.test(password)) {
                 setError("La contraseña debe tener al menos 8 caracteres, con letras y números");
@@ -71,8 +72,8 @@ function Register({toggleSignup}) {
                 setError(error.message || "Ocurrió un error");
                 setUserData({ nickname: "", email: "", password: "" }); //limpiar los campos
         }
-
     }
+    
     return (
         <section className="auth_wrapper">
             <section className="auth__header">
