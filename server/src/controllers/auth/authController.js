@@ -21,8 +21,6 @@ async function register(userData) {
     }
 
     const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    console.log("THis is data");
-    console.log(data);
     if (!pwdRegex.test(data.user_pwd)) {
         const error = new Error('The password must be at least 8 characters long, with letters and numbers');
         error.statusCode = 400;
