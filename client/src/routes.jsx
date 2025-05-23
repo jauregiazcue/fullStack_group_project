@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import WaitingRoomPage from "./components/WaitingRoom/WaitingRoomPage.jsx";
+import MakeGameForm from "./components/makeGameForm/MakeGameForm";
+import App from "./App.jsx";
 
 // Carga datos dummy
 function getAllAvatars() {
@@ -40,15 +42,11 @@ const loggedPlayer = players[0];
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <WaitingRoomPage
-        players={players}
-        avatars={avatars}
-        socket={socket}
-        loggedPlayer={loggedPlayer}
-      />
-    ),
-  },
+    element: <App />,
+    children: [
+      { path: "create", element: <MakeGameForm /> }
+    ]
+  }
 ]);
 
 export default router;

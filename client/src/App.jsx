@@ -1,5 +1,5 @@
 // App.jsx
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import {  Routes, Route, Link } from "react-router-dom";
 import { AuthProvider, AuthContext } from "./components/authContext/AuthContext";
 import { useContext } from "react";
 import JoinGameButton from "./components/joinGameButton/JoinGameButton";
@@ -29,11 +29,9 @@ function AppContent() {
 
 function App() {
   return (
-  <BrowserRouter>
     <AuthProvider>
       <AppContent />
     </AuthProvider>
-  </BrowserRouter>
   );
 }
 
