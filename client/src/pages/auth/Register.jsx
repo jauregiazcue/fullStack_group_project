@@ -82,7 +82,7 @@ function Register({toggleSignup}) {
                 <img src="src/assets/images/Login.png" alt="img" />
             </div>
 
-            <section className="auth_wrapper">
+            <section className="auth__wrapper">
 
                 <section className="auth__header">
                     <h1>Registro</h1>
