@@ -1,13 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap');
- 
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Bangers';
   font-family: 'Baloo 2', cursive;
-
-
 }
 
 :root {
@@ -19,140 +16,138 @@
   --verde-neon: #00FF9F; 
   --rosa-neon: #FF3865;  
 }
- 
+
 .question__section__wrapper {
   display: flex;
-  height: 100vh;
+  flex-direction: column;
+  height: auto;
   width: 100%;
+  max-height: 100vh;
   background-color: var(--cian-electrico);
+  overflow: hidden;
 }
 
 .question__img {
-  width: 50%;
-  height: auto; 
-  display: flex;
+  order: 0;
+  padding: 0.5rem 0;
   justify-content: center;
-  align-items: center;
-  
+  align-self: center;
+  flex: 0 0 auto;
+  display: flex;
+}
+
+.question__img img {
+  margin-top: 0.5rem;
+  width: auto; 
+  height: auto; 
+  max-height: 40vh;
 }
 
 .question__container {
-  flex: 1;
-  flex-direction: column;
+  order: 1;
+  flex: 1 1 auto;
+  flex-shrink: 1;
+  height: auto;
+  padding: 1.5rem;
+  box-shadow: none;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   background-color: white;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
 }
 
 .question__text {
-    font-weight: 800;
-    font-size: 1.5rem;
-    color:var(--azul-galaxia);
-    padding: 1rem 2rem;
-    border-radius: 1rem;
-    margin-bottom: 0.5rem;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--azul-galaxia);
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  line-height: 2;
+  margin-bottom: 0.5rem;
 }
-
 
 .answer,
 .clicked__answer {
   font-weight: 800;
-  font-size: 5rem;
-  padding: 1rem 2rem;
-  border-radius: 1.5rem;
-  margin: 0.5rem;
-  width: 100%;
-  max-width: 300px;
-  text-align: center;
-}
-
-.answer {
-  background-color: var(--cian-electrico);
+  font-size: 1.5rem;
   color: var(--azul-galaxia);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 2;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline;
+  background-color: transparent;
+  border: none;
 }
 
 .clicked__answer {
-  background-color: var(--magenta-neon);
-  color: var(--azul-galaxia);
-  box-shadow: #0D1B2A 0.1em 0.1em 0.1em;
+  border-radius: 0.5rem;
+  color: var(--magenta-neon);
+  background-color: rgba(255, 46, 181, 0.2);
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
 }
 
+.correct__answer,
+.incorrect__answer {
+  font-weight: 800;
+  font-size: 1.2rem;
+  margin: 0.5rem;
+  margin-top:2rem;
+  text-shadow: #0D1B2A 0.1em 0.1em 0.1em;
+}
 
 .correct__answer {
-    font-weight: 800;
-    font-size: 1.2rem;
-    color:var(--verde-neon);
-    margin: 0.5rem;
-    text-shadow: #0D1B2A 0.1em 0.1em 0.1em;
+  color: var(--verde-neon);
 }
 
 .incorrect__answer {
-    font-weight: 800;
-    font-size: 1.2rem;
-    color:var(--rosa-neon);
-    margin: 0.5rem;
-    text-shadow: #0D1B2A 0.1em 0.1em 0.1em;
+  color: var(--rosa-neon);
 }
 
-@media (max-width: 768px) {
- .question__section__wrapper {
-    flex-direction: column;
-    max-height: 100vh;
-    height: auto;
-    padding: 0; 
-    overflow: hidden;
+
+@media (min-width: 768px) {
+  .question__section__wrapper {
+    flex-direction: row;
+    height: 100vh;
+    max-height: none;
+    overflow: auto;
   }
 
   .question__img {
-    order: 0;
-    padding: 0.5rem 0;
-    justify-content:center;
-    align-self: center;
-    flex: 0 0 auto;
-    
+    width: 50%;
   }
 
   .question__img img {
-    margin-top: 0.5rem;
-    width: auto; 
-    height: auto; 
-    max-height: 30vh;
+    max-height: 60vh;
   }
- 
+
   .question__container {
-    order: 1; 
-    flex: 1 1 auto; /* Crece para llenar espacio */
-    flex-shrink: 1; /* Encoge si es necesario */
-    height: auto;
-    padding: 1.5rem;
-    box-shadow: none;
-    justify-content: center;
-    align-items: center;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
   }
 
   .question__text {
-    margin-top: -1rem;
-    font-size: 1.2rem;
-   
+    font-size: 2rem;
+    margin-top: 0;
+  }
+
+  .answer,
+  .clicked__answer {
+    font-size: 2rem;
+    margin: 0 0.05rem;
+    line-height: 1.5rem;
   }
 
   .clicked__answer {
-    width: 100%;
-    max-width: 300px;
-    font-size: 1rem;
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
   }
 
-  .answer { 
-    width: 100%;
-    max-width: 300px;
-    font-size: 1rem;
-    margin-top: 1.5rem;
+  .correct__answer, .incorrect__answer {
+  font-size: 2rem;
   }
+  
 }
-
- 
- 
