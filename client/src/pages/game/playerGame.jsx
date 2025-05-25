@@ -10,7 +10,7 @@ import Timer from "../../components/game/Timer.jsx";
 
 import "./Game.css";
 
-function Game() {
+function playerGame() {
     const userData = useContext(AuthContext);
     
     const game = useLoaderData(); // change useLoaderData to useEffect
@@ -29,7 +29,7 @@ function Game() {
         setPlayer(nickname);
         newSocket.emit("join", { nickname: nickname, gameId: game._id });
 
-        newSocket.on("gameSessionStarted", (newGame) => {
+        newSocket.on("gameStarted", (newGame) => {
             handleGetQuestion();
         })
 
@@ -72,4 +72,4 @@ function Game() {
     );
 }
 
-export default Game;
+export default Game;            {question && <Timer question={question} player={player} socket={socket} setShowingStats={setShowingStats} showingStats={showingStats}/>}
