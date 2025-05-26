@@ -56,6 +56,47 @@ async function joinPlayer(req, res) {
   }
 }
 
+async function editPlayer(req, res) {
+
+  try {
+
+    const gameId = req.params.gameId;
+    const playerId = req.params.playerId;
+    const data = req.body;
+
+    res.json(await gameController.editPlayer(gameId, playerId, data));
+
+  } catch (error) {
+    console.error(error);
+    if (error.statusCode) {
+      res.status(error.statusCode).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+
+}
+
+async function removePlayer(req, res) {
+
+  try {
+
+    const gameId = req.params.gameId;
+    const playerId = req.params.playerId;
+
+    res.json(await gameController.removePlayer(gameId, playerId));
+    
+  } catch (error) {
+    console.error(error);
+    if (error.statusCode) {
+      res.status(error.statusCode).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+  
+}
+
 async function startGame(req, res) {
   try {
     const id = req.params.gameId;
@@ -116,6 +157,8 @@ export default {
   getGameById,
   createGame,
   joinPlayer,
+  editPlayer,
+  removePlayer,
   startGame,
   nextQuestion,
   getQuestion

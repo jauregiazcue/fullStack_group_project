@@ -21,3 +21,5 @@ function Timer ({ socket }) {
         </section>
     );
 }  
+
+export default Timer;
