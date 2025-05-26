@@ -44,8 +44,16 @@ async function createGame(host, questionnaireId) {
   return game;
 }
 
-async function joinPlayer(nickname, gameId) { //meter _id
+async function joinPlayer(nickname, gameId) {
   return await playerController.createPlayer(nickname, gameId);
+}
+
+async function editPlayer(gameId, playerId, data) {
+  return await playerController.editPlayer(gameId, playerId, data);
+}
+
+async function removePlayer(playerId) {
+  return await playerController.removePlayer(playerId);
 }
 
 async function startGame(gameId) {
@@ -94,12 +102,12 @@ async function saveSocketIdToPlayer(nickname, gameId, socketId) {
   await player.save();
 }
 
-
-
 export default {
   getGameById,
   createGame,
   joinPlayer,
+  editPlayer,
+  removePlayer,
   startGame,
   nextQuestion,
   getQuestion,

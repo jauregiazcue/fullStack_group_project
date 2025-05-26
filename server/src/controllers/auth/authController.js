@@ -8,7 +8,6 @@ import {
     UserInvalidCredentials
 } from "../../utils/errors/userErrors.js";
 
-
 async function register(userData) {
 
 
@@ -22,7 +21,7 @@ async function register(userData) {
 
     const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-    if (!pwdRegex.test(data.user_pwd)) {
+    if (!pwdRegex.test(userData.password)) {
         const error = new Error('The password must be at least 8 characters long, with letters and numbers');
         error.statusCode = 400;
         throw error;
@@ -34,7 +33,7 @@ async function register(userData) {
 
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-    if (!emailRegex.test(data.user_email)) {
+    if (!emailRegex.test(userData.email)) {
         const error = new Error('The email is not valid');
         error.statusCode = 400;
         throw error;

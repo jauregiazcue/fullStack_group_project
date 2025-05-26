@@ -3,9 +3,10 @@ import fetchData from "../../utils/fetchData";
 import { AuthContext } from "../../components/authContext/AuthContext";
 import "./Auth.css" 
 import Register from "./Register";
+import "./Auth.css"
 // LOGIN 
 function Login() {
-    const { setToken, setNickname, setEmail } = useContext(AuthContext);
+    const { setToken, setNickname, setEmail, set_id } = useContext(AuthContext);
     const [error, setError] = useState(null);
     const [displaySignup, setDisplaySignup] = useState(false);
     const [userData, setUserData] = useState({
@@ -33,17 +34,23 @@ function Login() {
                 return;
             }
             const loginResponse = await fetchData("/login", "POST", userData);
+            console.log("This is the loginResponse");
+            console.log(loginResponse);
             if (loginResponse.error) {
                 setError(loginResponse.error);
                 return;
             }
             if (loginResponse.token) {
-            localStorage.setItem('authToken', loginResponse.token);
-            setToken(loginResponse.token);
-            setNickname(loginResponse.userData.nickname);
-            setEmail(loginResponse.userData.email);
-            setUserData({ email: "", password: "" }); 
-            /* alert("¡Registro exitoso!"); */
+                localStorage.setItem('authToken', loginResponse.token);
+                setToken(loginResponse.token);
+                setNickname(loginResponse.userData.nickname);
+                setEmail(loginResponse.userData.email);
+                setUserData({ email: "", password: "" });
+                /* alert("¡Registro exitoso!"); */
+            }
+            if (loginResponse.userData){
+                set_id(loginResponse.userData._id);
+                localStorage.setItem('_id', loginResponse.userData._id);
             }
             setError(null);
         } catch (error) {
