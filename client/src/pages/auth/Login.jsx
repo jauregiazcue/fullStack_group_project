@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import fetchData from "../../utils/fetchData";
 import { AuthContext } from "../../components/authContext/AuthContext";
-import "./Login.css"
+//import "./Login.css"
 import Register from "./Register";
 import "./Auth.css"
 // LOGIN 
