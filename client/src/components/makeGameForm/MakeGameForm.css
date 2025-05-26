@@ -1,0 +1,10 @@
+.makeGameForm__wrapper{
+    max-width:800px;
+    margin:auto;
+}
+
+.makeGameForm__form{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
