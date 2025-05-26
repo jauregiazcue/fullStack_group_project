@@ -1,4 +1,4 @@
-import avatarsApiController from "../controllers/avatars/avatarsApiController";
+import avatarsApiController from "../controllers/avatars/avatarsApiController.js";
 import {Router} from "express";
 
 
