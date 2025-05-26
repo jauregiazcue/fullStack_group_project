@@ -29,9 +29,11 @@ const gameSchema = new mongoose.Schema({
     default: Date.now
   },
   players: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Player",
-    required: false
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Player",
+      required: false
+    }]
   },
   host: {
     type: mongoose.Schema.Types.ObjectId,

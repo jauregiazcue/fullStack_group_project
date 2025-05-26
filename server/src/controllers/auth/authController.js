@@ -8,7 +8,6 @@ import {
     UserInvalidCredentials
 } from "../../utils/errors/userErrors.js";
 
-
 async function register(userData) {
 
 

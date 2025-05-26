@@ -9,7 +9,6 @@ function Join() {
 
     const userData = useContext(AuthContext);
 
-    const {code: defaultCode} = useParams();
     const [playerName,setPlayerName] = useState("");
     const [code,setCode] = useState("");
 
