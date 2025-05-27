@@ -72,4 +72,4 @@ function playerGame() {
     );
 }
 
-export default Game;            {question && <Timer question={question} player={player} socket={socket} setShowingStats={setShowingStats} showingStats={showingStats}/>}
+export default Game; 
