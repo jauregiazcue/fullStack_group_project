@@ -1,11 +1,13 @@
-const BASE_URL = "http://localhost:3000";
+// import { getToken } from "../utils/localStorage";
+
+const BASE_URL = "http://localhost:3003";
 
 async function fetchData(route, method="GET", data=null, token=null) {
     const url = BASE_URL + route;
-    // const token = getToken();
-    const options = { 
+    //const token = getToken();
+    const options = {
         method: method,
-        headers: {} 
+        headers: {}
     };
     
     if (token) {

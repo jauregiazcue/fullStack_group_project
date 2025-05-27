@@ -1,5 +1,6 @@
 import { useState } from "react";
 import fetchData from "../../utils/fetchData";
+import "./Auth.css"
 
 function Register({toggleSignup}) {
     const [error, setError] = useState(null);
