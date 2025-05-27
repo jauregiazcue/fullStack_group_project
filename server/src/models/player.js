@@ -18,16 +18,13 @@ const playerSchema = new mongoose.Schema({
     avatar:{
         type: String,
         required: true,
-        default: "/public/avatars/avatar(01).svg"
+        default: "/public/avatars/avatar(01).png"
     },
     socketId: {
         type: String
     }
 });
 
-const playerModel = mongoose.model("Player", playerSchema);
+const Player = mongoose.model("Player", playerSchema);
 
-export default {
-    playerModel,
-    playerSchema
-};
+export default Player;

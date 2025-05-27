@@ -16,7 +16,7 @@ import { customAlphabet } from "nanoid";
 const getRandomCode = customAlphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 6);
 
 async function getGameById(id) {
-  const game = await gameModel.findById(id) //Get the game using the id
+  const game = await gameModel.find({code:id}) //Get the game using the id
     .populate("players", "nickname") //add the players
     .populate("questionnaireId"); //add a questionnaire
 
@@ -45,6 +45,7 @@ async function createGame(host, questionnaireId) {
 }
 
 async function joinPlayer(nickname, gameId) {
+  console.log(nickname, gameId);
   return await playerController.createPlayer(nickname, gameId);
 }
 

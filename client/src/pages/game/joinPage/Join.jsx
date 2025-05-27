@@ -26,6 +26,9 @@ function Join() {
     const handleJoin = async(e) => {
         e.preventDefault();
         const result = await joinGame(code,playerName);
+        console.log("Result");
+        console.log(result);
+
         if (!userData){
             savePlayerNickname(playerName);
         }

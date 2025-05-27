@@ -45,7 +45,14 @@ async function joinPlayer(req, res) {
   try {
     const nickname = req.body.nickname;
     const id = req.params.gameId;
-    res.json(await gameController.joinPlayer(nickname, id));
+
+    const player = await gameController.joinPlayer(nickname, id)
+    
+    const io = req.io;
+    io.emit("PlayerJoined", player);
+
+    res.json(player);
+
   } catch (error) {
     console.error(error);
     if (error.statusCode) {
@@ -64,7 +71,12 @@ async function editPlayer(req, res) {
     const playerId = req.params.playerId;
     const data = req.body;
 
-    res.json(await gameController.editPlayer(gameId, playerId, data));
+    const player = await gameController.editPlayer(gameId, playerId, data);
+
+    const io = req.io;
+    io.emit("PlayerEdited", playerId);
+
+    res.json(player);
 
   } catch (error) {
     console.error(error);
@@ -83,6 +95,9 @@ async function removePlayer(req, res) {
 
     const gameId = req.params.gameId;
     const playerId = req.params.playerId;
+
+    const io = req.io;
+    io.emit("PlayerRemoved", playerId);
 
     res.json(await gameController.removePlayer(gameId, playerId));
     
@@ -103,9 +118,12 @@ async function startGame(req, res) {
     const io = req.io;
 
     const game = await gameController.startGame(id);
+
     io.emit("GameStarted", game);
     startTimer(io);
+    
     res.json(game);
+
   } catch (error) {
     console.error(error);
     if (error.statusCode) {

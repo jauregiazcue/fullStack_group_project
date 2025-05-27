@@ -4,7 +4,7 @@ const WaitingList = ({ players, gameCode, onRemove}) => {
 
   return (
     <section className="waiting-list">
-      {players.map((player) => (
+      {players && players.map((player) => (
         <div key={player._id} className="player-card">
           <img src={BASE_URL + player.avatar} alt="avatar" className="avatar" />
           <p>{player.nick}</p>

@@ -1,12 +1,8 @@
-/* import { useNavigate } from "react-router-dom";*/
-
-function Logout() {
-/*  const navigate = useNavigate();*/
-    const handleLogout = () => {
-        localStorage.removeItem('authToken');
-        /* navigate("/login"); */
-    };
-
+function Logout() {const handleLogout = () => {
+    ['authToken', '_id', 'email', 'nickname'].forEach(key =>
+        localStorage.removeItem(key)
+    );
+};
     return <button onClick={handleLogout}>Cerrar sesión</button>;
 }
 

@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 .auth__container {
   display: flex;
@@ -61,18 +66,18 @@
 }
 
 .auth__form label {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    text-align: center;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-align: center;
 }
 
 .auth__form input {
-    width: 50%;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 50%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .auth__button {
@@ -88,8 +93,13 @@
 
 }
 
+<<<<<<< HEAD
 .auth__button:hover { /* TO DO: REVISAR PORQUE NO FUNCIONA EL HOVER */
 background-color: var(--magenta-neon);/* var(--mario-orange);  */
+=======
+.auth__button:hover { /* TO DO: REVISAR POR QUE NO FUNCIONA EL HOVER */
+  background-color: var(--mario-orange); 
+>>>>>>> origin/playerFix
 }
 
 @media (max-width: 768px) {
@@ -124,8 +134,14 @@ background-color: var(--magenta-neon);/* var(--mario-orange);  */
   /* .auth__header h1 {
     font-size: 1.8rem;
     text-align: center;
+<<<<<<< HEAD
   } */
   .auth__header h1 {
+=======
+  }
+
+   .auth__header h1 {
+>>>>>>> origin/playerFix
     font-size: 2rem;
     margin-top: 0;
   }
