@@ -1,8 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 .auth__container {
   display: flex;
@@ -12,12 +7,12 @@
 
 }
 
-.auth__wrapper {
+/* .auth__wrapper {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
 .auth__image img {
   width: 50%;
@@ -32,7 +27,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: green /* var(--mario-green);*/
+  background-color: var(--cian-electrico) 
 } 
 
 .auth__wrapper {
@@ -88,13 +83,13 @@
   border: none;
   font-weight: bold;
   font-size: 1rem;
-  background-color: green;/* var(--mario-green); */
+  background-color: var(--cian-electrico);
   margin-top: 3rem;
 
 }
 
 .auth__button:hover { /* TO DO: REVISAR PORQUE NO FUNCIONA EL HOVER */
-background-color: orangered;/* var(--mario-orange);  */
+background-color: var(--magenta-neon);/* var(--mario-orange);  */
 }
 
 @media (max-width: 768px) {
@@ -126,11 +121,11 @@ background-color: orangered;/* var(--mario-orange);  */
     align-items: center;
   }
 
-  .auth__header h1 {
+  /* .auth__header h1 {
     font-size: 1.8rem;
     text-align: center;
-  }
-   .auth__header h1 {
+  } */
+  .auth__header h1 {
     font-size: 2rem;
     margin-top: 0;
   }
@@ -153,8 +148,8 @@ background-color: orangered;/* var(--mario-orange);  */
     margin-top: 1.5rem;
   }
 
-  .auth__button:hover { /* TO DO: REVISAR PORQUE NO FUNCIONA EL HOVER */
-    background-color: green;/* var(--mario-orange);  */
+  .auth__button:hover { 
+    background-color: var(--magenta-neon);
   }
 }
 

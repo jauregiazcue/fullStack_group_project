@@ -16,7 +16,7 @@ function GameManager() {
     return (
         <section className="gameManager">
             <h1>GameManager</h1>
-            {userData && <h1>{userData.nickname}</h1>}
+            {userData && <h2>{userData.nickname}</h2>}
         </section>
     );
 }

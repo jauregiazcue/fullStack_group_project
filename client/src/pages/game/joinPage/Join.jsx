@@ -1,9 +1,10 @@
-import { useNavigate, useParams} from "react-router-dom";
-import { useState, useContext, useEffect } from "react";
+/* import { useNavigate, useParams} from "react-router-dom";
+ */import { useState, useContext, useEffect } from "react";
 import { joinGame } from "../../../utils/api/game.js";
 import { savePlayerNickname } from "../../../utils/localStorage";
 
-import { AuthContext } from "../../components/authContext/AuthContext.jsx";
+import { AuthContext } from "../../../components/authContext/AuthContext.jsx";
+import "./Join.css"
 
 function Join() {
 
@@ -14,8 +15,8 @@ function Join() {
 
     const [error,setError] = useState(null);
 
-    const navigate = useNavigate();
-
+/*     const navigate = useNavigate();
+ */
     useEffect(() => {
         if(userData) {
             setPlayerName(userData.nickname);
@@ -32,24 +33,33 @@ function Join() {
             console.log(result.error);
             setError(result.error);
         }
-        navigate("/waiting/"+result.gameId);
-    }
+/*         navigate("/waiting/"+result.gameId);
+ */    }
 
     return(
-        <div>
-            <h1>Unirse a una partida</h1>
+        <section className="join__game__container">   
 
-            {error && <p className="error">{error}</p>}
+            <section className="join__game__img">
+                <img src="src/assets/images/erraton.png" alt="img" />
+            </section>
 
-            <form onSubmit={handleJoin}>
-                <label>Player's nickname </label>
-                <input type="text" value={playerName} onChange={(e) => setPlayerName(e.target.value)} />
-                <label>Game Code</label>
-                <input type="text" value={code} onChange={(e) => setCode(e.target.value)} />
-                <button type="submit">Join</button>
-            </form>
-        </div>
+            <div className="join__game__wrapper">
+                <h1>Unirse a una partida</h1>
+
+                {error && <p className="error">{error}</p>}
+
+                <form className="join__game__form"onSubmit={handleJoin}>
+                    <label className="join__game__label">Player's nickname </label>
+                    <input className="join__game__input" type="text" required="true" value={playerName} onChange={(e) => setPlayerName(e.target.value)} />
+                    <label className="join__game__label">Game Code</label>
+                    <input className="join__game__input" type="text" required="true" value={code} onChange={(e) => setCode(e.target.value)} />
+                    <button className="join__game__button" type="submit">Join</button>
+                </form>
+            </div>
+        
+        </section>
+
     )
 }
 
-export default Join
+export default Join;

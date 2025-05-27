@@ -13,7 +13,7 @@ function AppContent() {
     <>
       <nav>
         <h1>Erratón</h1>
-          {nickname ? <p>Logeado como {nickname} !</p> : <Login />}
+          {nickname ? <p>Autenticado como {nickname} !</p> : <Login />}
         <JoinGameButton/>
         <p>El token es: {token}</p>
         <span>{token && <Link to="/create">Create game!</Link>}</span>
