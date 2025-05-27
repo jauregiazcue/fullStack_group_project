@@ -7,15 +7,15 @@ import fetchData from "../../../utils/fetchData";
 function WaitingRoom() {
 
     const userData = useContext(AuthContext);
-
+    const code = useParams().gameId;
+    
     const [game, setGame] = useState({});
     const [isHost, setIsHost] = useState(false);
 
     const [playerRemoved, setPlayerRemoved] = useState(false);
 
-    useEffect(async () => {
-        const result = await getGameById(code);
-        setGame(result);
+    useEffect(() => {
+        handleGameInfo();
 
         if (userData) {
             if (result.host === userData._id) {
@@ -24,9 +24,8 @@ function WaitingRoom() {
         }
     }, [])
 
-    useEffect(async () => {
-        const result = await getGameById(code);
-        setGame(result);
+    useEffect(() => {
+        handleGameInfo();
     }, [playerRemoved])
 
     handleRemovePlayer = async (playerId) => {
@@ -34,9 +33,16 @@ function WaitingRoom() {
         setPlayerRemoved(!playerRemoved);
     }
 
+    handleGameInfo = async () => {
+        const result = await getGameById(code);
+        setGame(result);
+    }
+
     return (
         <>
-            {isHost ? <WaitingRoomHost game={game} hostData={userData} onRemove={handleRemovePlayer} /> : <WaitingRoomPlayer game={game} />}
+            {isHost ? <WaitingRoomHost game={game} onRemove={handleRemovePlayer} /> : <WaitingRoomPlayer game={game} />}
         </>
     )
 }
+
+export default WaitingRoom;

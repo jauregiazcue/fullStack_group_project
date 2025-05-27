@@ -34,9 +34,8 @@ function WaitingRoomPlayer({game}) {
     },[])
 
     useEffect(() => {
-        
-    }, [playerAvatar])
-
+        setAvatarSelectionActive(false);
+    },[playerAvatar])
 
     handleAvatarClick = () => {
         setAvatarSelectionActive(!avatarSelectionActive);
@@ -46,11 +45,8 @@ function WaitingRoomPlayer({game}) {
         setPlayerAvatar(newAvatar);
 
         const editedAvatar = await fetchData(`/game/edit/${game.code}/${playerID}`, "PUT", {avatar: newAvatar});
-
-        setAvatarSelectionActive(false);
+        
     };
-
-
 
     return (
         <section className="waiting-room">
