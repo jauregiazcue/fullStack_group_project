@@ -18,7 +18,7 @@ const playerSchema = new mongoose.Schema({
     avatar:{
         type: String,
         required: true,
-        default: "/public/avatars/avatar(01).svg"
+        default: "/public/avatars/avatar(01).png"
     },
     socketId: {
         type: String

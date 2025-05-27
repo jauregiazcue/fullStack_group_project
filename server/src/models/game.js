@@ -39,6 +39,10 @@ const gameSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true
+  },
+  hostSocketId: {
+    type: String,
+    required: true
   }
 });
 
