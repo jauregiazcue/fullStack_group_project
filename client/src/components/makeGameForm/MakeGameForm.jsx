@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import fetchData from "../../utils/fetchData";
 import { AuthContext } from "../../components/authContext/AuthContext";
@@ -7,6 +7,9 @@ import "./MakeGameForm.css";
 const MakeGameForm = () => {
   const { token, nickname, email, _id } = useContext(AuthContext);
   const [questionaires, setQuestionaires] = useState([]);
+
+  const navigate = useNavigate();
+  
   useEffect(() => {
     const fetchQuestionaires = async () => {
       const response = await fetchData("/questionnaire");
@@ -42,7 +45,8 @@ const MakeGameForm = () => {
       host:_id
     }
     const response = await fetchData(`/game/${formData.questionaireId}`, "POST", makeGameQuery, token);
-    Navigate(`/${response.code}`);
+    navigate("/waiting/"+response.code);
+    
     console.log("response isss: ");
     console.log(response);
   };
