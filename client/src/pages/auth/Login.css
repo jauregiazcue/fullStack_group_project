@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap');
+
+
+
+:root {
+    --azul-galaxia: #0D1B2A;  
+    --gris-azulado: #1B263B;  
+    --magenta-neon: #FF2EB5; 
+    --cian-electrico: #08dbc3;  
+    --amarillo-neon: #FFEA00;  
+    --verde-neon: #00FF9F; 
+    --rosa-neon: #FF3865;
+    --bold-red: #ff3333;
+    --light-gray: #f2f2f2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Baloo 2', sans-serif; 
+} 
+
+@media (max-width: 768px) {
+
+   
+    .auth__container {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+    }
+
+    .auth__image {
+        order: 0; 
+        width: 100%;
+        height: auto;
+        padding: 0.5rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--cian-electrico);
+    }
+
+    .auth__image img {
+        width: 60%; 
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .auth__wrapper {
+        order: 1; 
+        height: auto;
+        padding: 1.5rem;
+        background-color: white;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        box-shadow: none;
+    }
+
+    .auth__header h1 {
+        font-size: 2rem;
+        margin-top: 1rem;
+        text-align: center;
+        color: var(--azul-galaxia);
+    }
+
+    .error {
+        color: var(--bold-red);
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .auth__form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .auth__label {
+        display: flex;
+        justify-content: center;
+        align-self: center;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+
+    .auth__input {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        font-size: 1rem;
+        margin-left: 0.8rem;
+    }
+
+    .auth__button {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 1rem;
+        color: var(--azul-galaxia);
+        padding: 0.5rem 0.7rem;
+        border: none;
+        font-weight: bold;
+        font-size: 1rem;
+        background-color: var(--magenta-neon);
+        margin-top: 1.5rem;
+        cursor: pointer;
+        margin-bottom: 2rem;
+        margin-left: 0.8rem;
+    }
+
+    .auth__button:hover { 
+        background-color: var(--magenta-neon);
+    }
+
+    .auth__redirect p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0.5rem;
+        font-family: 'Baloo 2', sans-serif;
+        cursor: pointer;
+    }
+}

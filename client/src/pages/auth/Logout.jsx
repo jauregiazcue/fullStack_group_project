@@ -7,7 +7,7 @@ function Logout() {
         /* navigate("/login"); */
     };
 
-    return <button onClick={handleLogout}>Cerrar sesión</button>;
+    return <button onClick={handleLogout}>Log out</button>;
 }
 
 export default Logout;

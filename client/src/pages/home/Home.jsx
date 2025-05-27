@@ -1,5 +1,5 @@
 import { useContext } from "react";
-
+import "./Home.css"
 import { AuthContext } from "../../components/authContext/AuthContext";
 import Login from "../auth/Login";
 // import JoinGameButton from "../../components/joinGameButton/JoinGameButton";
@@ -11,10 +11,12 @@ const Home = () =>{
     const { token, nickname, email, _id } = useContext(AuthContext);
     const navigate = useNavigate();
     return(
-        <>
-            <button onClick={() => navigate('/join')}>Unete!</button>
-            {!_id ? <Login /> : <MakeGameForm /> }
-        </>
+        
+            <div>
+                <button className="home__join__button" onClick={() => navigate('/join')}>Join!</button>
+                {!_id ? <Login /> : <MakeGameForm /> }
+            </div>
+        
     )
 }
 

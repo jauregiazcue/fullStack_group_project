@@ -1,6 +1,6 @@
 import { useState } from "react";
 import fetchData from "../../utils/fetchData";
-import "./Auth.css"
+import "./Register.css"
 
 function Register({toggleSignup}) {
     const [error, setError] = useState(null);
@@ -76,31 +76,31 @@ function Register({toggleSignup}) {
     }
     
     return (
-        <section className="auth__container">
+        <section className="register__auth__container">
 
-            <div className="auth__image">
-                <img src="src/assets/images/Login.png" alt="img" />
+            <div className="register__auth__image">
+                <img src="src/assets/images/Register.png" alt="img" />
             </div>
 
-            <section className="auth__wrapper">
+            <section className="register__auth__wrapper">
 
-                <section className="auth__header">
-                    <h1>Registro</h1>
+                <section className="register__auth__header">
+                    <h1>Register</h1>
                     <p className="error">{error}</p>
                 </section>
 
-                <form className="auth__form" onSubmit={handleSubmit}>
-                    <label htmlFor="nickname">Nombre de usuario</label>
+                <form className="register__auth__form" onSubmit={handleSubmit}>
+                    <label htmlFor="nickname">Nickname</label>
                     <input type="text" name="nickname" id="nickname" value={userData.nickname} onChange={handleNickname} />
-                    <label htmlFor="email">Correo electrónico</label>
+                    <label htmlFor="email">Email</label>
                     <input type="email" name="email" id="email" value={userData.email} onChange={handleUserEmail} />
-                    <label htmlFor="password">Contraseña</label>
+                    <label htmlFor="password">Password</label>
                     <input type="password" name="password" id="password" value={userData.password} onChange={handleUserPassword} />
 
-                    <button className="auth__button">Regístrate</button>
+                    <button className="register__auth__button">Register</button>
                 </form>
 
-                <p onClick={toggleSignup}>¿Ya tienes una cuenta? </p>
+                <p onClick={toggleSignup}> Already have an account?</p>
                 
             </section>
         </section>

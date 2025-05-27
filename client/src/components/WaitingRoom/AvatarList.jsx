@@ -3,7 +3,7 @@ const BASE_URL = "http://localhost:3003";
 
 const AvatarList = ({ avatars, currentAvatar, onSelect }) => {
   return (
-    <div className="avatar-list">
+    <div className="avatar__list">
       {avatars.map((avatar, index) => (
         <img
           key={index}

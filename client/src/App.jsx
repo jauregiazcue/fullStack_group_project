@@ -5,8 +5,12 @@ import { useContext } from "react";
 import JoinGameButton from "./components/joinGameButton/JoinGameButton";
 import MakeGameForm from "./components/makeGameForm/MakeGameForm";
 import Login from "./pages/auth/Login";
+import WaitingList from "./pages/game/waitingRoom/WaitingRoom";
+import "./App.css";
 // asdasd2@asd.com
 // qweqwe2@qwe.com
+
+
 function AppContent() {
   const { token, nickname, email } = useContext(AuthContext);
   return (
@@ -25,12 +29,13 @@ function AppContent() {
       </main>
     </>
   );
-}
+} 
 
 function App() {
   return (
     <AuthProvider>
-      <AppContent />
+      <AppContent /> 
+      {/* <WaitingList/> */}
     </AuthProvider>
   );
 }

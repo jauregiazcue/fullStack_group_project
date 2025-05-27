@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+:root {
+  --azul-galaxia: #0D1B2A;  
+  --gris-azulado: #1B263B;  
+  --magenta-neon: #FF2EB5; 
+  --cian-electrico: #08dbc3;  
+  --amarillo-neon: #FFEA00;  
+  --verde-neon: #00FF9F; 
+  --rosa-neon: #FF3865;
+  --bold-red: #ff3333;
+  --light-gray: #f2f2f2;
+  }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fredoka One', sans-serif;
+  }
+
+@media (max-width: 768px) {
+
+  /*PRUEBAS*/
+  
+  .register__auth__container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+  }
+
+  .register__auth__image {
+    order: 0; 
+    width: 100%;
+    height: auto;
+    padding: 0.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cian-electrico);
+  }
+
+  .register__auth__image img {
+    width: 50%; 
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .register__auth__wrapper {
+    order: 1; 
+    height: auto;
+    background-color: white;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;   
+    padding: 1.5rem;
+  }
+
+  .register__auth__header {
+    margin-bottom: 0.1rem;
+  }
+
+  .register__auth__header h1 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--azul-galaxia);
+  }
+
+  .error {
+    color: var(--bold-red);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .register__auth__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .register__auth__form label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .register__auth__form input {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+  }
+
+  .register__auth__button {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 1rem;
+    color: var(--light-gray);
+    padding: 0.5rem 0.7rem;
+    border: none;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: var(--magenta-neon);
+    margin-top: 1.5rem;
+    cursor: pointer;
+    color: var(--azul-galaxia);
+  }
+
+  .register__auth__button:active { 
+    background-color: var(--magenta-neon);
+
+  }
+
+  .register__auth__wrapper p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 0.5rem;
+      font-family: 'Baloo 2', sans-serif;
+      cursor: pointer;
+  }
+}
