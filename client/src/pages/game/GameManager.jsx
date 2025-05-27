@@ -1,61 +1,83 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router"
-import { io } from "socket.io-client";
 
 // Utils Imports
-import { getGameById } from "../../utils/api/game.js";
+import { getGameById, nextQuestion } from "../../utils/api/game.js";
 import { getQuestion } from "../../utils/api/game.js";
 
 //Components Imports
 import { AuthContext } from "../../components/authContext/AuthContext.jsx";
+import { SocketContext } from "../../components/socketContext/SocketContext.jsx";
 import GamePlayer from "../../components/game/GamePlayer/GamePlayer.jsx"
 import GameHost from "../../components/game/GameHost/GameHost.jsx"
 
 
 function GameManager() {
-    //---------------Init Variables---------------
-    //Set Context Variables
     let userData = useContext(AuthContext);
-
-    //Set Params Variables
+    const socket = useContext(SocketContext)
     const code = useParams().gameId;
 
-    //Set State Variables
     const [game, setGame] = useState();
     const [isHost, setIsHost] = useState(false);
 
     const [question, setQuestion] = useState(null);
-    const [socket, setSocket] = useState(null);
     const [player, setPlayer] = useState(null);
-    //--------------------------------------------
 
     useEffect(() => {
         (async () => {
             const result = await getGameById(code);
-            const actualResult = result[0];
-            setGame(actualResult);
-            if (userData) {
-                if (actualResult.host === userData._id) {
-                    setIsHost(true);
-                }
-            }
-            if (actualResult.state === "started") {
-                setQuestion(await handleGetQuestion(code));
+            const actualGame = result[0];
+            setGame(actualGame);
+
+            if (userData && actualGame.host === userData._id) {
+            setIsHost(true);
             }
         })();
+    }, [code, userData]);
 
-        //Define the socket
-        // defineSockets();
+    useEffect(() => {
+        if (!socket || !game) return;
 
-
-
-        const newSocket = defineSockets();
-        return () => {
-            newSocket.off("gameStarted");
-            newSocket.disconnect();
+        const onGameStarted = () => getQuestion(code).then(setQuestion);
+        const onQuestionStats = () => setShowingStats(true);
+        const onNextQuestion = () => {
+            console.log("nextQuestion");
+            console.log(getQuestion(code));
+            setShowingStats(false);
+            getQuestion(code).then(setQuestion);
+        };
+        const onGameFinished = () => alert("partida finalizada");
+        const onAnswer = (answer) => console.log(answer+"asda");
+        const onPlayerData = ({ response }) => {
+            if(response=="true"){
+                console.log("bueno a ver");
+                nextQuestion(code).then(setQuestion);                
+            }
+            console.log("It does get here");
         }
 
-    }, [])
+        socket.on("gameStarted", onGameStarted);
+        socket.on("questionStats", onQuestionStats);
+        socket.on("nextQuestion", onNextQuestion);
+        socket.on("gameFinished", onGameFinished);
+        socket.on("answer", onAnswer);
+        socket.on("playerData", onPlayerData);
+        console.log("Goddamnit");
+        socket.emit("register", {
+            gameId: code,
+            userId: userData?._id,
+            isHost,
+        });
+
+        return () => {
+            socket.off("gameStarted", onGameStarted);
+            socket.off("questionStats", onQuestionStats);
+            socket.off("nextQuestion", onNextQuestion);
+            socket.off("gameFinished", onGameFinished);
+            socket.off("answer", onAnswer);
+            socket.off("playerData", onPlayerData);
+        };
+    }, [socket, game, code, userData, isHost]);
 
     const handleGetQuestion = async (gameCode) => {
         const newQuestion = await getQuestion(gameCode);
@@ -64,34 +86,6 @@ function GameManager() {
 
     const setShowingStats = async () => {
         //TO DO
-    }
-
-    const defineSockets = () => {
-        const newSocket = io("http://localhost:3000");
-
-
-        newSocket.on("gameStarted", () => {
-            handleGetQuestion();
-        })
-
-        newSocket.on("questionStats", (stats) => {
-            setShowingStats(true);
-        })
-
-        newSocket.on("nextQuestion", (question) => {
-            setShowingStats(false);
-            handleGetQuestion();
-        })
-
-        newSocket.on("gameFinished", (question) => {
-            alert("partida finalizada");
-            // TODO mostra tus estadisticas.
-        })
-        newSocket.on("answer", (answer) => {
-            console.log(answer);
-        })
-        setSocket(newSocket);
-        return newSocket;
     }
 
     return (

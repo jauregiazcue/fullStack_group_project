@@ -7,6 +7,7 @@ import http from "http";
 import {Server as socketIo} from "socket.io";
 import { connectDB } from "./config/mongoose.js";
 import gameController from "./controllers/game/gameController.js";
+import registerSocketHandlers from "./sockets/socketHandlers.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -40,13 +41,7 @@ app.use((req,res,next)=> {
     req.io = io;
     next();
 });
-io.on("connection", (socket)=> {
-    console.log("Conection", socket.id);
-    socket.on("join",(data)=> {
-        console.log("Join",data,socket.id);
-        gameController.saveSocketIdToPlayer(data.nickname,data.gameId,socket.id);
-    })
-})
+registerSocketHandlers(io);
 
 app.use("/",router);
 
