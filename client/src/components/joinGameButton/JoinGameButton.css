@@ -1,0 +1,14 @@
+.joinButton__wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom:2px;
+    border-style:solid;
+    border-color:black;
+}
+
+.joinButton__form{
+    display: flex;
+    flex-direction: column;
+}

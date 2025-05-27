@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { getPlayerNickname } from "../../../utils/localStorage";
 
 import Avatar from "../Avatar/Avatar";
 import AvatarSelector from "./AvatarSelector";
 import fetchData from "../../utils/fetchData";
+
+import socket from "../../utils/socket";
 
 async function getAvatars() {
     const response = await fetch("/avatar");
@@ -19,6 +22,8 @@ function WaitingRoomPlayer({game}) {
 
     const avatars = getAvatars();
 
+    const navigate = useNavigate();
+
     const [avatarSelectionActive, setAvatarSelectionActive] = useState(false);
 
     useEffect(() => {
@@ -31,12 +36,20 @@ function WaitingRoomPlayer({game}) {
                 setPlayerID(player._id);
             }
         })
+
+        socket.on("PlayerRemoved", (data) => {
+            console.log("PlayerRemoved");
+            console.log(data);
+            if (data === playerID) {
+                alert("You've been removed from the game");
+                navigate("/home")
+            }
+        })
     },[])
 
     useEffect(() => {
-        
-    }, [playerAvatar])
-
+        setAvatarSelectionActive(false);
+    },[playerAvatar])
 
     let handleAvatarClick = () => {
         setAvatarSelectionActive(!avatarSelectionActive);
@@ -46,11 +59,8 @@ function WaitingRoomPlayer({game}) {
         setPlayerAvatar(newAvatar);
 
         const editedAvatar = await fetchData(`/game/edit/${game.code}/${playerID}`, "PUT", {avatar: newAvatar});
-
-        setAvatarSelectionActive(false);
+        
     };
-
-
 
     return (
         <section className="waiting-room">

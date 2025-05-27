@@ -1,14 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import GameManager from "./pages/game/GameManager.jsx";
 
-import Login from "./pages/auth/Login";
+import Home from "./pages/home/Home";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
-          <Login />
-          <GameManager />
+        <Home/>
       </>
     ),
   },
