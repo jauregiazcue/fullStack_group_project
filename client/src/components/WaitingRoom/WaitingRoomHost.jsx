@@ -4,17 +4,16 @@ import WaitingList from "./WaitingList";
 import { startGame } from "../../utils/api/game.js";
 
 function WaitingRoomHost({ game, onRemove }) {
-
     const navigate = useNavigate();
 
-    handleStartGame = async () => {
+    const handleStartGame = async () => {
         const game = await startGame(game.code);
         navigate(`/game/${game.code}`);
     }
 
     return (
         <>
-            <h1>{game.title}</h1>
+            <h1>{game[0].questionnaireId.title}</h1>
             <WaitingList players={game.players} gameCode={game.code} onRemove={onRemove} />
             <button className="start-button" onClick={handleStartGame}>Start</button>
         </>

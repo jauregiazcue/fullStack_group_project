@@ -1,15 +1,15 @@
 
 const avatars = [
-    "/public/avatars/avatar(01).svg",
-    "/public/avatars/avatar(02).svg",
-    "/public/avatars/avatar(03).svg",    
-    "/public/avatars/avatar(04).svg",    
-    "/public/avatars/avatar(05).svg",    
-    "/public/avatars/avatar(06).svg",    
-    "/public/avatars/avatar(07).svg",    
-    "/public/avatars/avatar(08).svg",    
-    "/public/avatars/avatar(09).svg",    
-    "/public/avatars/avatar(10).svg",
+    "/public/avatars/avatar(01).png",
+    "/public/avatars/avatar(02).png",
+    "/public/avatars/avatar(03).png",    
+    "/public/avatars/avatar(04).png",    
+    "/public/avatars/avatar(05).png",    
+    "/public/avatars/avatar(06).png",    
+    "/public/avatars/avatar(07).png",    
+    "/public/avatars/avatar(08).png",    
+    "/public/avatars/avatar(09).png",    
+    "/public/avatars/avatar(10).png",
 ]
 
 function getAvatars() {

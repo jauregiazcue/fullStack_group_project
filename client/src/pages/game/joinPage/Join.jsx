@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import { joinGame } from "../../../utils/api/game.js";
 import { savePlayerNickname } from "../../../utils/localStorage";
 
-import { AuthContext } from "../../components/authContext/AuthContext.jsx";
+import { AuthContext } from "../../../components/authContext/AuthContext.jsx";
 
 function Join() {
 
@@ -25,6 +25,9 @@ function Join() {
     const handleJoin = async(e) => {
         e.preventDefault();
         const result = await joinGame(code,playerName);
+        console.log("Result");
+        console.log(result);
+
         if (!userData){
             savePlayerNickname(playerName);
         }

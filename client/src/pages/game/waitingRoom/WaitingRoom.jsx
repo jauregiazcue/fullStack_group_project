@@ -1,24 +1,35 @@
 import { useState, useContext, useEffect } from "react";
+import { useParams } from "react-router"
+
+// Utils Imports
+import { getGameById } from "../../../utils/api/game.js";
+import fetchData from "../../../utils/fetchData";
+import socket from "../../../utils/socket.js";
+
+//Components Imports
 import WaitingRoomHost from "../../../components/WaitingRoom/WaitingRoomHost";
 import WaitingRoomPlayer from "../../../components/WaitingRoom/WaitingRoomPlayer";
 import { AuthContext } from "../../../components/authContext/AuthContext";
-import fetchData from "../../../utils/fetchData";
-import socket from "../../../utils/socket.js";
-function WaitingRoom() {
 
+
+
+function WaitingRoom() {
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH");
     const userData = useContext(AuthContext);
     const code = useParams().gameId;
-    
     const [game, setGame] = useState({});
     const [isHost, setIsHost] = useState(false);
 
     const [playerRemoved, setPlayerRemoved] = useState(false);
 
-    useEffect(() => {
-        handleGameInfo();
-
-        if (userData) {
-            if (result.host === userData._id) {
+    console.log(code);
+    useEffect(()=> async () => {
+        const result = await handleGameInfo();
+        console.log("This is userData", userData);
+        console.log("This is the result", result);
+        if (userData && result) {
+            if (result[0].host === userData._id) {
+                console.log("Cheerio");
                 setIsHost(true);
             }
         }
@@ -52,14 +63,16 @@ function WaitingRoom() {
         }
     }, [])
 
-    handleRemovePlayer = async (playerId) => {
+    let handleRemovePlayer = async (playerId) => {
         const response = await fetchData(`/game/remove/${game.code}/${playerId}`, "DELETE");
         setPlayerRemoved(!playerRemoved);
     }
 
-    handleGameInfo = async () => {
+    let handleGameInfo = async () => {
         const result = await getGameById(code);
         setGame(result);
+        
+        return result;
     }
 
     return (

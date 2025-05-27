@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { getPlayerNickname } from "../../../utils/localStorage";
+import { getPlayerNickname } from "../../utils/localStorage.js";
 
 import Avatar from "../Avatar/Avatar";
 import AvatarSelector from "./AvatarSelector";
@@ -14,7 +14,7 @@ async function getAvatars() {
     return response;
 }
 
-function WaitingRoomPlayer({game}) {
+function WaitingRoomPlayer({ game }) {
 
     const [name, setName] = useState("");
     const [playerAvatar, setPlayerAvatar] = useState("");
@@ -29,13 +29,14 @@ function WaitingRoomPlayer({game}) {
     useEffect(() => {
         const nick = getPlayerNickname();
         setName(nick);
-
-        game.players.map((player) => {
-            if (player.nickname === nick) {
-                setPlayerAvatar(player.avatar);
-                setPlayerID(player._id);
-            }
-        })
+        if (game.players) {
+            game.players.map((player) => {
+                if (player.nickname === nick) {
+                    setPlayerAvatar(player.avatar);
+                    setPlayerID(player._id);
+                }
+            })
+        }
 
         socket.on("PlayerRemoved", (data) => {
             console.log("PlayerRemoved");
@@ -45,11 +46,11 @@ function WaitingRoomPlayer({game}) {
                 navigate("/home")
             }
         })
-    },[])
+    }, [])
 
     useEffect(() => {
         setAvatarSelectionActive(false);
-    },[playerAvatar])
+    }, [playerAvatar])
 
     let handleAvatarClick = () => {
         setAvatarSelectionActive(!avatarSelectionActive);
@@ -58,8 +59,8 @@ function WaitingRoomPlayer({game}) {
     let handleAvatarChange = async (newAvatar) => {
         setPlayerAvatar(newAvatar);
 
-        const editedAvatar = await fetchData(`/game/edit/${game.code}/${playerID}`, "PUT", {avatar: newAvatar});
-        
+        const editedAvatar = await fetchData(`/game/edit/${game.code}/${playerID}`, "PUT", { avatar: newAvatar });
+
     };
 
     return (
@@ -68,12 +69,12 @@ function WaitingRoomPlayer({game}) {
             <h1>{game.title}</h1>
 
             <section className="waiting-room__player">
-                <Avatar imageUrl={playerAvatar} onClick={handleAvatarClick}/>
+                <Avatar imageUrl={playerAvatar} onClick={handleAvatarClick} />
                 <h2>{name}</h2>
             </section>
 
             <section className="waiting-room__avatars">
-                {avatarSelectionActive && <AvatarSelector avatars={avatars} currentAvatar={playerAvatar} onAvatarSelect={handleAvatarChange}/>}
+                {avatarSelectionActive && <AvatarSelector avatars={avatars} currentAvatar={playerAvatar} onAvatarSelect={handleAvatarChange} />}
             </section>
 
         </section>

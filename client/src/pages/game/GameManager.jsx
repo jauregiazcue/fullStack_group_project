@@ -30,10 +30,11 @@ function GameManager() {
     //--------------------------------------------
 
     useEffect(() => async () => {
-        setGame(await getGameById(code));
+        const result = await getGameById(code);
+        setGame(result);
 
         if (userData) {
-            if (game.host === userData._id) {
+            if (result.host === userData._id) {
                 setIsHost(true);
             }
         }

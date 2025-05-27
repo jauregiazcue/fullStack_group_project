@@ -1,6 +1,6 @@
 // imagen del avatar de usuario
 import React from "react";
-import "./Avatar.css";
+//import "./Avatar.css";
 
 const Avatar = ({ avatarImageUrl, onClick }) => {
     return (

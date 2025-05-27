@@ -5,12 +5,14 @@ import Join from "./pages/game/joinPage/Join";
 import WaitingRoom from "./pages/game/waitingRoom/WaitingRoom";
 import GameManager from "./pages/game/GameManager";
 
+import { Outlet } from "react-router-dom";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
-        <Home/>
+        <Outlet/>
       </>
     ),
     children: [

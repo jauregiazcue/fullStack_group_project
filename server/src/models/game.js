@@ -40,10 +40,10 @@ const gameSchema = new mongoose.Schema({
     ref: "User",
     required: true
   },
-  hostSocketId: {
+  /*hostSocketId: {
     type: String,
     required: true
-  }
+  }*/
 });
 
 export default mongoose.model("Game", gameSchema);
