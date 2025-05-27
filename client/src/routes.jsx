@@ -1,26 +1,36 @@
 import { createBrowserRouter } from "react-router-dom";
-// import WaitingRoomPage from "./components/WaitingRoom/WaitingRoomPage.jsx";
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import { AuthProvider, AuthContext } from "./components/authContext/AuthContext";
 
-// import Game from "./pages/game/Game.jsx";
-// import GameManager from "./pages/game/GameManager.jsx";
-
-// import Login from "./pages/auth/Login";
-
-import FinalPage from "./pages/game/finalPage/FinalPage";
-
+import Home from "./pages/home/Home";
+import Join from "./pages/game/joinPage/Join";
+import WaitingRoom from "./pages/game/waitingRoom/WaitingRoom";
+import GameManager from "./pages/game/GameManager";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
-        <FinalPage idGame={1} />
-          {/* <Login />
-          <GameManager /> */}
+        <Home/>
       </>
     ),
+    children: [
+      {
+        path: "/home",
+        element: <Home/>
+      },
+      {
+        path: "/join",
+        element: <Join/>
+      },
+      {
+        path: "/waiting/:gameId",
+        element: <WaitingRoom/>
+      },
+      {
+        path: "/game/:gameId",
+        element: <GameManager/>
+      }
+    ],
   },
 ]);
 

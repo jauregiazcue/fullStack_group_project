@@ -9,7 +9,7 @@ function GameManager() {
 
     useEffect(() => { 
         if(userData) {
-            getGameById(); //instead of gameById it needs to be getGameByHostId
+            //getGameById(); //instead of gameById it needs to be getGameByHostId
         }
     });
 
