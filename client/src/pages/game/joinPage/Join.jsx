@@ -8,7 +8,6 @@ import { AuthContext } from "../../../components/authContext/AuthContext.jsx";
 function Join() {
 
     const userData = useContext(AuthContext);
-
     const [playerName,setPlayerName] = useState("");
     const [code,setCode] = useState("");
 
@@ -28,14 +27,14 @@ function Join() {
         console.log("Result");
         console.log(result);
 
-        if (!userData){
+        if (!userData.nickname){
             savePlayerNickname(playerName);
         }
         if (result.error){
             console.log(result.error);
             setError(result.error);
         }
-        navigate("/waiting/"+result.gameId);
+        navigate("/waiting/"+code);
     }
 
     return(

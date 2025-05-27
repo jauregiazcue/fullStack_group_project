@@ -333,7 +333,7 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "http://localhost:3003",
+			"value": "http://localhost:3000",
 			"type": "default"
 		}
 	]

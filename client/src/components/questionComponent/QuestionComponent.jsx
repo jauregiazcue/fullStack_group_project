@@ -9,7 +9,7 @@ const QuestionComponent = ({ question }) => {
         }))[1].toString();
     }
 
-    const fragments = question.match(/([#@][^#@]+[#@])/g);
+    const fragments = question && question.match(/([#@][^#@]+[#@])/g);
     const keyAnswers = []
     const idFragments = fragments.map((fragment) => {
         const identifier = nanoid();
@@ -20,16 +20,15 @@ const QuestionComponent = ({ question }) => {
         }
         return [identifier, fragment.substring(1, fragment.length - 1)];
     })
-    console.log("Los ids son", keyAnswers)
-    console.log("Los fragments son", idFragments);
 
     const handleClick = (text) => {
         setResultado(checkAnswer(text[0], keyAnswers))
     }
     return (
         <div>
+            <h3>{resultado}</h3>
             {idFragments.map((text) => {
-                return (<p onClick={handleClick(text)} key={text[0]}>
+                return (<p onClick={()=>handleClick(text)} key={text[0]}>
                     {text[1]}
                 </p>)
             })}

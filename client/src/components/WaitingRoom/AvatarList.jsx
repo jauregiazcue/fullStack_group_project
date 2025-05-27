@@ -1,5 +1,5 @@
 
-const BASE_URL = "http://localhost:3003";
+const BASE_URL = "http://localhost:3000";
 
 const AvatarList = ({ avatars, currentAvatar, onSelect }) => {
   return (

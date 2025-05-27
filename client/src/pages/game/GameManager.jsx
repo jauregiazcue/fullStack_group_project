@@ -29,22 +29,25 @@ function GameManager() {
     const [player, setPlayer] = useState(null);
     //--------------------------------------------
 
-    useEffect(() => async () => {
-        const result = await getGameById(code);
-        setGame(result);
-
-        if (userData) {
-            if (result.host === userData._id) {
-                setIsHost(true);
+    useEffect(() => {
+        (async () => {
+            const result = await getGameById(code);
+            const actualResult = result[0];
+            setGame(actualResult);
+            if (userData) {
+                if (actualResult.host === userData._id) {
+                    setIsHost(true);
+                }
             }
-        }
+            if (actualResult.state === "started") {
+                setQuestion(await handleGetQuestion(code));
+            }
+        })();
 
         //Define the socket
-        defineSockets();
+        // defineSockets();
 
-        if (game.state === "started") {
-            setQuestion(handleGetQuestion());
-        }
+
 
         const newSocket = defineSockets();
         return () => {
@@ -52,10 +55,10 @@ function GameManager() {
             newSocket.disconnect();
         }
 
-    })
+    }, [])
 
-    const handleGetQuestion = async () => {
-        const newQuestion = await getQuestion(game._id);
+    const handleGetQuestion = async (gameCode) => {
+        const newQuestion = await getQuestion(gameCode);
         setQuestion(newQuestion);
     }
 
@@ -64,7 +67,7 @@ function GameManager() {
     }
 
     const defineSockets = () => {
-        const newSocket = io("http://localhost:3003");
+        const newSocket = io("http://localhost:3000");
 
 
         newSocket.on("gameStarted", () => {
@@ -84,14 +87,15 @@ function GameManager() {
             alert("partida finalizada");
             // TODO mostra tus estadisticas.
         })
-
+        newSocket.on("answer", (answer) => {
+            console.log(answer);
+        })
         setSocket(newSocket);
         return newSocket;
     }
 
     return (
         <section className="gameManager">
-
             <section className="topInfo">
                 <h1>Code : {code ? code : "CodeIsMissing"}</h1>
             </section>

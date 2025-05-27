@@ -17,7 +17,7 @@ const getRandomCode = customAlphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 6);
 
 async function getGameById(id) {
   const game = await gameModel.find({code:id}) //Get the game using the id
-    .populate("players", "nickname") //add the players
+    .populate("players") //add the players
     .populate("questionnaireId"); //add a questionnaire
 
   if (!game) throw new GameDoesNotExist();
@@ -58,7 +58,7 @@ async function removePlayer(playerId) {
 }
 
 async function startGame(gameId) {
-  const game = await gameModel.findById(gameId);
+  const game = await gameModel.findOne({code:gameId});
   if (!game) throw new GameDoesNotExist();
   game.state = "started";
   game.updatedAt = new Date();
@@ -68,7 +68,7 @@ async function startGame(gameId) {
 }
 
 async function nextQuestion(gameId) {
-  const game = await gameModel.findById(gameId).populate("questionnaireId");
+  const game = await gameModel.findOne({code:gameId}).populate("questionnaireId");
   if (!game) throw new GameDoesNotExist();
 
   game.questionIndex++;
@@ -87,7 +87,7 @@ async function nextQuestion(gameId) {
 }
 
 async function getQuestion(gameId) {
-  const game = await gameModel.findById(gameId);
+  const game = await gameModel.findOne({code:gameId});
   if (!game) throw new GameDoesNotExist();
   const questionnaire = await questionnaireModel.findById(game.questionnaireId);
   if(!questionnaire) throw new QuestionnaireDoesNotExist();
