@@ -6,6 +6,7 @@ const MatchHistory = () => {
     const [matchHistory, setMatchHistory] = useState([]);
     const [detailActive, setDetailActive] = useState(false);
     const [selectedMatch, setSelectedMatch] = useState(null);
+    
     useEffect(() => {
         fetchMockHistory(setMatchHistory);
     }, []);
@@ -129,4 +130,4 @@ const MatchHistory = () => {
     );
 }
 
-export default MatchHistory
+export default MatchHistory;

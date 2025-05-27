@@ -34,7 +34,8 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend)
         }
     };
 
-const DetailedMatchHistory = ({ hideDetail, match }) => {
+const DetailedMatchHistory = ({ match }) => { // hideDetail, quitado
+    console.log("DetailedMatchHistory:match:",match);
         const data = {
         labels: match.players.map((player) => player.name),
         datasets: [
@@ -48,18 +49,25 @@ const DetailedMatchHistory = ({ hideDetail, match }) => {
         ]
     };
 
-    return(
-        <div onClick={hideDetail} className={style.detailContainer}>
-            <div onClick={(event) => event.stopPropagation()} class={style.historyWrapper}>
-                <h3>This is the match Id: {match.gameId}</h3>
-                <h3>This is the host Id: {match.hostId}</h3>
-                <h3>This is the winner of the match: {match.players.reduce((max, player) => {
-                            return player.score > max.score ? player : max;
-                        }).name}</h3>
-                <Bar data={data} options={options} />;
-            </div>
+    return (
+      <div className={style.detailContainer}> {/* onClick={hideDetail} */}
+        <div
+        //   onClick={(event) => event.stopPropagation()}
+          class={style.historyWrapper}>
+          <h3>This is the match Id: {match.gameId}</h3>
+          <h3>This is the host Id: {match.hostId}</h3>
+          <h3>
+            This is the winner of the match:{" "}
+            {
+              match.players.reduce((max, player) => {
+                return player.score > max.score ? player : max;
+              }).name
+            }
+          </h3>
+          <Bar data={data} options={options} />;
         </div>
-    )
+      </div>
+    );
 }
 
 export default DetailedMatchHistory
