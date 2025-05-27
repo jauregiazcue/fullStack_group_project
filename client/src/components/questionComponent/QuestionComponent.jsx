@@ -1,14 +1,14 @@
 import { nanoid } from 'nanoid'
 import { useState } from 'react'
-const QuestionComponent = () => {
+const QuestionComponent = ({question}) => {
     const [resultado, setResultado] = useState(false);
     const checkAnswer = (answerIdentifier, keyAnswers) =>{
         return (keyAnswers.find((element)=>{
             return element[0] == answerIdentifier;
         }))[1].toString();
     }
-    const mockData = "#El equipo de los X-men esta compuesto por personajes como# @Popeye,@ #Lobezno o Ciclope#";
-    const fragments = mockData.match(/([#@][^#@]+[#@])/g);
+    
+    const fragments = question.match(/([#@][^#@]+[#@])/g);
     const keyAnswers = []
     const idFragments = fragments.map((fragment)=>{
         const identifier = nanoid();

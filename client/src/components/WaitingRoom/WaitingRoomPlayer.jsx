@@ -38,11 +38,11 @@ function WaitingRoomPlayer({game}) {
     }, [playerAvatar])
 
 
-    handleAvatarClick = () => {
+    let handleAvatarClick = () => {
         setAvatarSelectionActive(!avatarSelectionActive);
     };
 
-    handleAvatarChange = async (newAvatar) => {
+    let handleAvatarChange = async (newAvatar) => {
         setPlayerAvatar(newAvatar);
 
         const editedAvatar = await fetchData(`/game/edit/${game.code}/${playerID}`, "PUT", {avatar: newAvatar});
