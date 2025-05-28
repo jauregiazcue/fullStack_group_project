@@ -1,5 +1,5 @@
-/* import { useNavigate, useParams} from "react-router-dom";
- */import { useState, useContext, useEffect } from "react";
+import { useNavigate, useParams} from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
 import { joinGame } from "../../../utils/api/game.js";
 import { savePlayerNickname } from "../../../utils/localStorage";
 
@@ -14,8 +14,8 @@ function Join() {
 
     const [error,setError] = useState(null);
 
-/*     const navigate = useNavigate();
- */
+    const navigate = useNavigate();
+
     useEffect(() => {
         if(userData) {
             setPlayerName(userData.nickname);
