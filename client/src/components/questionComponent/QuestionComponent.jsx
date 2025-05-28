@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid'
+import "./QuestionComponent.css"
 import { useState, useContext } from 'react'
 import { SocketContext } from "../../components/socketContext/SocketContext.jsx";
 
@@ -32,15 +33,38 @@ const QuestionComponent = ({ question }) => {
         socket.emit("playerToHost", {response: checkAnswer(text[0], keyAnswers)});
     }
     return (
-        <div>
-            <h3>{resultado}</h3>
-            {idFragments.map((text) => {
-                return (<p onClick={()=>handleClick(socket, text)} key={text[0]}>
-                    {text[1]}
-                </p>)
-            })}
+        <div className='question__section__wrapper'>
+            <section className='question__img'>
+                <img src="src/assets/images/Error_finder.png" alt="img" />
+            </section>
+
+            <section className="question__container">
+
+                <p className="question__text">
+                    {phraseFragments.map((fragment, index) => {
+                        if (fragment.selectable) {
+                            return (
+                                <span
+                                    key={fragment.id}
+                                    onClick={()=>handleClick(socket, text)}
+                                    className={clickedId === fragment.id ? 'clicked__answer' : 'answer'}
+                                >
+                                    {fragment.text}
+                                </span>
+                            );
+                        }
+                        return <span key={index}>{fragment.text}</span>;
+                    })}
+                </p>
+
+                {clickedId && (
+                    resultado === true
+                        ? <p className='correct__answer'>¡Correcto!</p>
+                        : <p className='incorrect__answer'>¡Incorrecto!</p>
+                )}
+            </section>
         </div>
-    )
-}
+    );
+};
 
 export default QuestionComponent;

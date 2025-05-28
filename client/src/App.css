@@ -1,18 +1,27 @@
-:root {
-  --text: #F4EAD5;
-  --background: #27283d;
-  --strongPrimary: #1a1b2d;
-  --weakPrimary: #eabe71;
-  --strongSecondary: #c05622;
-  --weakSecondary: #eabe71;
-  --hover: lightgray;
 
-  --circleSize: 80px;
-}
-
-html {
+/* html {
   background-color: var(--background);
   color: var(--text);
+} */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap');
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Baloo 2', cursive;
+}
+
+:root {
+  --azul-galaxia: #0D1B2A;  
+  --gris-azulado: #1B263B;  
+  --magenta-neon: #FF2EB5; 
+  --cian-electrico: #08dbc3;  
+  --amarillo-neon: #FFEA00;  
+  --verde-neon: #00FF9F; 
+  --rosa-neon: #FF3865;  
+
 }
 
 

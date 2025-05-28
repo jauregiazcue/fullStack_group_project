@@ -1,6 +1,6 @@
 import { useState } from "react";
 import fetchData from "../../utils/fetchData";
-import "./Auth.css"
+import "./Register.css"
 
 function Register({toggleSignup}) {
     const [error, setError] = useState(null);
@@ -76,21 +76,33 @@ function Register({toggleSignup}) {
     }
     
     return (
-        <section className="auth_wrapper">
-            <section className="auth__header">
-                <h1>Registro</h1>
-                <p className="error">{error}</p>
+        <section className="register__auth__container">
+
+            <div className="register__auth__image">
+                <img src="src/assets/images/Register.png" alt="img" />
+            </div>
+
+            <section className="register__auth__wrapper">
+
+                <section className="register__auth__header">
+                    <h1>Register</h1>
+                    <p className="error">{error}</p>
+                </section>
+
+                <form className="register__auth__form" onSubmit={handleSubmit}>
+                    <label htmlFor="nickname">Nickname</label>
+                    <input type="text" name="nickname" id="nickname" value={userData.nickname} onChange={handleNickname} />
+                    <label htmlFor="email">Email</label>
+                    <input type="email" name="email" id="email" value={userData.email} onChange={handleUserEmail} />
+                    <label htmlFor="password">Password</label>
+                    <input type="password" name="password" id="password" value={userData.password} onChange={handleUserPassword} />
+
+                    <button className="register__auth__button">Register</button>
+                </form>
+
+                <p onClick={toggleSignup}> Already have an account?</p>
+                
             </section>
-            <form className="auth__form" onSubmit={handleSubmit}>
-                <label htmlFor="nickname">Nombre de usuario</label>
-                <input type="text" name="nickname" id="nickname" value={userData.nickname} onChange={handleNickname} />
-                <label htmlFor="email">Correo electrónico</label>
-                <input type="email" name="email" id="email" value={userData.email} onChange={handleUserEmail} />
-                <label htmlFor="password">Contraseña</label>
-                <input type="password" name="password" id="password" value={userData.password} onChange={handleUserPassword} />
-                <button>Regístrate</button>
-            </form>
-            <p onClick={toggleSignup}>¿Ya tienes una cuenta? </p>
         </section>
     )
 }

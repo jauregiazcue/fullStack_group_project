@@ -11,11 +11,11 @@ function WaitingRoomHost({ game, onRemove }) {
     }
 
     return (
-        <>
+        <section className="waiting__room">
             <h1>{game.questionnaireId.title}</h1>
             <WaitingList players={game.players} gameCode={game.code} onRemove={onRemove} />
-            <button className="start-button" onClick={handleStartGame}>Start</button>
-        </>
+            <button className="waiting__room__start__button" onClick={handleStartGame}>Start</button>
+        </section>
     );
 }
 

@@ -29,7 +29,7 @@ async function fetchData(route, method="GET", data=null, token=null) {
         return responseData;
     } catch (error) {
         console.error("Error de fetch", error);
-        return { error: "Error al hacer el fetch de los datos" }; 
+        return { error: "Error processing the request" }; 
     }
 }
 

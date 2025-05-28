@@ -1,9 +1,8 @@
 import { useContext, useState } from "react";
 import fetchData from "../../utils/fetchData";
 import { AuthContext } from "../../components/authContext/AuthContext";
-//import "./Login.css"
 import Register from "./Register";
-import "./Auth.css"
+import "./Login.css"
 // LOGIN 
 function Login() {
     const { setToken, setNickname, setEmail, set_id } = useContext(AuthContext);
@@ -30,7 +29,7 @@ function Login() {
 
         try {
             if (!userData.email || userData.email.trim() === "" || !userData.password) {
-                setError("Debes completar ambos campos");
+                setError("You must complete both fields");
                 return;
             }
             const loginResponse = await fetchData("/login", "POST", userData);
@@ -46,7 +45,6 @@ function Login() {
                 setNickname(loginResponse.userData.nickname);
                 setEmail(loginResponse.userData.email);
                 setUserData({ email: "", password: "" });
-                /* alert("¡Registro exitoso!"); */
             }
             if (loginResponse.userData){
                 set_id(loginResponse.userData._id);
@@ -54,27 +52,39 @@ function Login() {
             }
             setError(null);
         } catch (error) {
-            setError("Hubo un problema con la solicitud. Intenta de nuevo.");
+            setError("There was an error with your request. Try again later.");
         }
     };
 
     return (
         !displaySignup ? <>
-            <section className="auth-wrapper">
-                <section className="auth__header">
-                    <h1>Inicia sesión</h1>
-                    <p className="error">{error}</p>
+            <section className="auth__container">
+
+                <div className="auth__image">
+                    <img src="src/assets/images/erraton.png" alt="img" />
+                </div>
+
+                <section className="auth-wrapper">
+
+                    <section className="auth__header">
+                        <h1>Login</h1>
+                        <p className="error">{error}</p>
+                    </section>
+
+                    <form className="auth__form" onSubmit={handleSubmit}>
+                        <label className="auth__label" htmlFor="email">Email</label>
+                        <input className="auth__input" type="email" name="email" id="email" value={userData.email} onChange={handleUserEmail} />
+                        <label className="auth__label" htmlFor="password">Password</label>
+                        <input className="auth__input" type="password" name="password" id="password" value={userData.password} onChange={handleUserPassword} />
+                        <button className="auth__button">Sign In</button>
+                    </form>
+
+                    <section className="auth__redirect">
+                        <p onClick={toggleSignup}> Don't have an account? </p>
+                    </section>
+
                 </section>
-                <form className="auth__form" onSubmit={handleSubmit}>
-                    <label htmlFor="email">Correo electrónico</label>
-                    <input type="email" name="email" id="email" value={userData.email} onChange={handleUserEmail} />
-                    <label htmlFor="password">Contraseña</label>
-                    <input type="password" name="password" id="password" value={userData.password} onChange={handleUserPassword} />
-                    <button className="auth__button">Acceder</button>
-                </form>
-                <section className="auth__redirect">
-                    <p onClick={toggleSignup}>¿No tienes una cuenta? </p>
-                </section>
+                
             </section>
         </> : <Register toggleSignup={toggleSignup}/>
     )

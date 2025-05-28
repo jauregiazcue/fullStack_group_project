@@ -1,0 +1,135 @@
+
+.question__section__wrapper {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 100%;
+  max-height: 100vh;
+  background-color: var(--cian-electrico);
+  overflow: hidden;
+}
+
+.question__img {
+  order: 0;
+  padding: 0.5rem 0;
+  justify-content: center;
+  align-self: center;
+  flex: 0 0 auto;
+  display: flex;
+}
+
+.question__img img {
+  margin-top: 0.5rem;
+  width: auto; 
+  height: auto; 
+  max-height: 40vh;
+}
+
+.question__container {
+  order: 1;
+  flex: 1 1 auto;
+  flex-shrink: 1;
+  height: auto;
+  padding: 1.5rem;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.question__text {
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--azul-galaxia);
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  line-height: 2;
+  margin-bottom: 0.5rem;
+}
+
+.answer,
+.clicked__answer {
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--azul-galaxia);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 2;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline;
+  background-color: transparent;
+  border: none;
+}
+
+.clicked__answer {
+  border-radius: 0.5rem;
+  color: var(--magenta-neon);
+  background-color: rgba(255, 46, 181, 0.2);
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+}
+
+.correct__answer,
+.incorrect__answer {
+  font-weight: 800;
+  font-size: 1.2rem;
+  margin: 0.5rem;
+  margin-top:2rem;
+  text-shadow: #0D1B2A 0.1em 0.1em 0.1em;
+}
+
+.correct__answer {
+  color: var(--verde-neon);
+}
+
+.incorrect__answer {
+  color: var(--rosa-neon);
+}
+
+
+@media (min-width: 768px) {
+  .question__section__wrapper {
+    flex-direction: row;
+    height: 100vh;
+    max-height: none;
+    overflow: auto;
+  }
+
+  .question__img {
+    width: 50%;
+  }
+
+  .question__img img {
+    max-height: 60vh;
+  }
+
+  .question__container {
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+  }
+
+  .question__text {
+    font-size: 2rem;
+    margin-top: 0;
+  }
+
+  .answer,
+  .clicked__answer {
+    font-size: 2rem;
+    margin: 0 0.05rem;
+    line-height: 1.5rem;
+  }
+
+  .clicked__answer {
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+  }
+
+  .correct__answer, .incorrect__answer {
+  font-size: 2rem;
+  }
+  
+}

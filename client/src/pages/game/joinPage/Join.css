@@ -1,0 +1,124 @@
+@media (max-width: 768px) {
+
+  :root {
+    --azul-galaxia: #0D1B2A;
+    --gris-azulado: #1B263B;
+    --magenta-neon: #FF2EB5;
+    --cian-electrico: #08dbc3;
+    --amarillo-neon: #FFEA00;
+    --verde-neon: #00FF9F;
+    --rosa-neon: #FF3865;
+    --bold-red: #ff3333;
+    --light-gray: #f2f2f2;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Baloo 2', sans-serif;
+  }
+
+  body {
+    max-height: 100vh;
+    overflow: hidden;
+  }
+
+  .join__game__container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+  }
+
+  .join__game__img {
+    border: 0;
+    padding: 0.5rem 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: var(--cian-electrico);
+    width: 100%;
+    height: auto;
+    order: 0;
+  }
+
+  .join__game__img img {
+    margin-top: 0.5rem;
+    width: 70%;
+    height: auto;
+  }
+
+  .join__game__wrapper {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    height: auto;
+    order: 1;
+    box-shadow: none;
+  }
+
+  .join__game__wrapper h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--azul-galaxia);
+  }
+
+  .error {
+    color: var(--rosa-neon);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .join__game__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 1rem;
+  }
+
+  .join__game__label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--cian-electrico);
+  }
+
+  .join__game__input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+  }
+
+  .join__game__button {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 1rem;
+    color: var(--azul-galaxia);
+    padding: 0.5rem 0.7rem;
+    border: none;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: var(--magenta-neon);
+    margin-top: 1.5rem;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    margin-left: 0.8rem;
+}
+
+  .join__game__button:active {
+    background-color: var(--magenta-neon);
+  }
+
+}
