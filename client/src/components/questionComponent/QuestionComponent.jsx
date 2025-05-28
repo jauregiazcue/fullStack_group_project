@@ -1,37 +1,37 @@
 import { nanoid } from 'nanoid'
-import { useState } from 'react'
 import "./QuestionComponent.css"
+import { useState, useContext } from 'react'
+import { SocketContext } from "../../components/socketContext/SocketContext.jsx";
 
-const QuestionComponent = () => {
-    const [clickedId, setClickedId] = useState(null);
-    const [resultado, setResultado] = useState(null); 
+const QuestionComponent = ({ question }) => {
+    
+    const socket = useContext(SocketContext);
+    const [resultado, setResultado] = useState(false);
 
-    const mockData = "El equipo de los X-men está compuesto por personajes como @Popeye@ , #Lobezno# o #Ciclope#.";
-
-
-    const { phraseFragments, keyAnswers } = useMemo(() => {
-        const fragments = mockData.split(/([#@][^#@]+[#@])/g);  
-
-        const keyAnswers = [];
-        const phraseFragments = fragments.map(fragment => {
-            if (fragment.match(/^[#@][^#@]+[#@]$/)) {
-                const identifier = nanoid();
-                const isCorrect = fragment.startsWith('@');
-                const cleanText = fragment.slice(1, -1);
-                keyAnswers.push([identifier, isCorrect]);
-                return { id: identifier, text: cleanText, selectable: true };
-            }
-            return { text: fragment, selectable: false };
-        });
-
-        return { phraseFragments, keyAnswers };
-    }, []);
-
-    const checkAnswer = (id) => {
-        const answer = keyAnswers.find(el => el[0] === id);
-        return answer ? answer[1] : false;
-    };
-
+    const checkAnswer = (answerIdentifier, keyAnswers) => {
+        return (keyAnswers.find((element) => {
+            return element[0] == answerIdentifier;
+        }))[1].toString();
+    }
+    if (typeof question == "object"){
+        question = question.question;
+    }
+    const fragments = question && question.match(/([#@][^#@]+[#@])/g);
+    const keyAnswers = []
+    const idFragments = fragments.map((fragment) => {
+        const identifier = nanoid();
+        if (fragment[0] === "@") {
+            keyAnswers.push([identifier, true])
+        } else {
+            keyAnswers.push([identifier, false])
+        }
+        return [identifier, fragment.substring(1, fragment.length - 1)];
+    })
+    
+    const handleClick = (socket, text) => {
+        console.log(checkAnswer(text[0], keyAnswers));
+        socket.emit("playerToHost", {response: checkAnswer(text[0], keyAnswers)});
+    }
     return (
         <div className='question__section__wrapper'>
             <section className='question__img'>
@@ -46,10 +46,7 @@ const QuestionComponent = () => {
                             return (
                                 <span
                                     key={fragment.id}
-                                    onClick={() => {
-                                        setClickedId(fragment.id);
-                                        setResultado(checkAnswer(fragment.id));
-                                    }}
+                                    onClick={()=>handleClick(socket, text)}
                                     className={clickedId === fragment.id ? 'clicked__answer' : 'answer'}
                                 >
                                     {fragment.text}

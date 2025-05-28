@@ -14,10 +14,11 @@ const MakeGameForm = () => {
     const fetchQuestionaires = async () => {
       const response = await fetchData("/questionnaire");
       const data = await response;
+      console.log(data);
       setQuestionaires(data);
-    if (data.length > 0) {
-      setFormData(prev => ({ ...prev, questionaireId: data[0]._id }));
-    }
+      if (data.length > 0) {
+        setFormData(prev => ({ ...prev, questionaireId: data[0]._id }));
+      }
     };
     fetchQuestionaires();
   }, [])

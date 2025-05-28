@@ -18,8 +18,9 @@ async function createPlayer(nickname, gameId) {
     if (gameSession.players.some(player => player.nickname === nickname)) {
         return new PlayerAlredyExist();
     }
-
-    const newPlayer = new Player({ nickname: nickname, gameId: gameId })
+    console.log("Please");
+    console.log(gameSession);
+    const newPlayer = new Player({ nickname: nickname, gameId: gameSession._id })
     await newPlayer.save();
 
     gameSession.players.push(newPlayer);
